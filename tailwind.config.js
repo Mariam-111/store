@@ -13,4 +13,6 @@ module.exports = withMT({
     extend: {},
   },
   plugins: [daisyui],
+  darkMode: 'class',
+
 });

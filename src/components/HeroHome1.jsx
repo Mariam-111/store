@@ -8,7 +8,7 @@ import { all } from "axios";
 const HeroHome1 = ({ allProducts }) => {
   return (
     <div>
-      <div className=" flex items-center flex-col">
+      <div className=" flex items-center flex-col bg-white dark:bg-[#4a4a4a]">
         <div className="bg-[url('images/hero/hero-1.jpg')] bg-cover font-sans w-full h-screen">
           <div className="flex flex-col justify-center h-full w p-10 lg:w-1/3">
             <p className="text-red-600 font-bold py-3">SUMMER COLLECTION</p>
@@ -59,7 +59,7 @@ const HeroHome1 = ({ allProducts }) => {
       </div>
 
       <div>
-        <div className="flex flex-row flex-wrap p-12 justify-center items-center">
+        <div className="flex flex-row flex-wrap p-12 justify-center items-center bg-white dark:bg-[#4a4a4a]">
           {allProducts.map(
             (product) =>
               product.category == "jewelery" && (
