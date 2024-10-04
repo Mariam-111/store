@@ -1,16 +1,16 @@
 import React from "react";
 import MainNavbar from "../components/MainNavbar";
+import CartContent from "../components/CartContent";
 import MainFooter from "../components/MainFooter";
-import ShopContent from "../components/ShopContent";
 
-const Shop = ({ allProducts, addToCart, cartNum }) => {
+const Cart = ({ cartItems, cartNum, setCartItems }) => {
   return (
     <div>
       <MainNavbar cartNum={cartNum} />
-      <ShopContent allProducts={allProducts} addToCart={addToCart} />
+      <CartContent cartItems={cartItems} setCartItems={setCartItems} />
       <MainFooter />
     </div>
   );
 };
 
-export default Shop;
+export default Cart;
