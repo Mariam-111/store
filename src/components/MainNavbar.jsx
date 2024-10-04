@@ -9,12 +9,40 @@ import {
   Button,
 } from "@material-tailwind/react";
 import { BsCart4 } from "react-icons/bs";
-import { IoMoon, IoMenu, IoClose } from "react-icons/io5";
+import { IoMoon, IoSunny, IoMenu, IoClose } from "react-icons/io5";
+
 
 const MainNavbar = ({ cartNum }) => {
   const navigate = useNavigate();
+   const [mode, setMode] = useState("light");
+
+  const setDark = () => {
+
+    localStorage.theme = mode;
+    setMode("dark");
+    
+  }
+  const setLight = () => {
+    
+    localStorage.theme = mode;
+    setMode("light");
+
+  }
+
+  useEffect(() => {
+    if (
+      localStorage.theme === 'dark' ||
+      (!('theme' in localStorage) &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    };
+  }, [mode]);
+
   return (
-    <div className="flex md:flex-row flex-col justify-between bg-white p-4">
+    <div className="flex md:flex-row flex-col justify-between bg-white dark:bg-[#4a4a4a] p-4">
       <div>
         <img src={logo} alt="Logo" className="py-5 md:p-0" />
       </div>
@@ -37,7 +65,7 @@ const MainNavbar = ({ cartNum }) => {
       <div className="flex gap-3">
         <div className="relative inline-flex">
           <button
-            className="bg-[#014026] font-sans font-bold text-center px-6 rounded-lg text-white active:opacity-[0.85] py-2"
+            className="bg-[#014026] dark:bg-[#0F172A] font-sans font-bold text-center px-6 rounded-lg text-white active:opacity-[0.85] py-2"
             type="button"
             onClick={() => navigate("/cart")}
           >
@@ -47,9 +75,17 @@ const MainNavbar = ({ cartNum }) => {
             {cartNum}
           </span>
         </div>
-        <Button className="bg-[#014026]">Login</Button>
-        <Button className="bg-[#0F172A]">
-          <IoMoon />
+        <Button className="bg-[#014026] dark:bg-[#0F172A]">Login</Button>
+       <Button className="bg-[#014026] dark:bg-[#0F172A]"
+          onClick={mode === "light" ? setDark : setLight}
+        >
+          {
+            mode == "light" ? (
+              <IoMoon onClick={setDark}/>
+            ) : (
+              <IoSunny onClick={setLight}/>
+            )
+         }
         </Button>
         <div className="lg:hidden block bg-[#757575]">
           <Menu>
