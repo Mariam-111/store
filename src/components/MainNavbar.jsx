@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import logo from "../images/mainAssets/logo.png";
 import {
   Menu,
@@ -9,11 +9,41 @@ import {
   Button,
 } from "@material-tailwind/react";
 import { BsCart4 } from "react-icons/bs";
-import { IoMoon, IoMenu, IoClose } from "react-icons/io5";
+import { IoMoon, IoSunny, IoMenu, IoClose } from "react-icons/io5";
 
-const MainNavbar = ({ loggedFlag, setLoggedFlag, currentName,role }) => {
+const MainNavbar = ({
+  loggedFlag,
+  setLoggedFlag,
+  currentName,
+  role,
+  cartNum,
+}) => {
+  const navigate = useNavigate();
+  const [mode, setMode] = useState("light");
+
+  const setDark = () => {
+    localStorage.theme = mode;
+    setMode("dark");
+  };
+  const setLight = () => {
+    localStorage.theme = mode;
+    setMode("light");
+  };
+
+  useEffect(() => {
+    if (
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [mode]);
+
   return (
-    <div className="flex md:flex-row flex-col justify-between bg-white p-4">
+    <div className="flex md:flex-row flex-col justify-between bg-white dark:bg-[#4a4a4a] p-4">
       <div>
         <img src={logo} alt="Logo" className="py-5 md:p-0" />
       </div>
@@ -34,11 +64,20 @@ const MainNavbar = ({ loggedFlag, setLoggedFlag, currentName,role }) => {
         </div>
       </div>
       <div className="flex gap-3">
-        <Button className="bg-[#014026]">
-          <BsCart4 />
-        </Button>
+        <div className="relative inline-flex">
+          <button
+            className="bg-[#014026] dark:bg-[#0F172A] font-sans font-bold text-center px-6 rounded-lg text-white active:opacity-[0.85] py-2"
+            type="button"
+            onClick={() => navigate("/cart")}
+          >
+            <BsCart4 />
+          </button>
+          <span className="absolute rounded-full p-1 text-xs content-[''] grid place-items-center top-[4%] right-[2%] translate-x-2/4 -translate-y-2/4  min-w-[24px] min-h-[24px] bg-red-400 text-white font-bold">
+            {cartNum}
+          </span>
+        </div>
         <Link to="/Login" className={`${loggedFlag ? "hidden" : "block"}`}>
-          <Button className="bg-[#014026]">Login</Button>
+          <Button className="bg-[#014026] dark:bg-[#0F172A]">Login</Button>
         </Link>
 
         <div
@@ -61,16 +100,29 @@ const MainNavbar = ({ loggedFlag, setLoggedFlag, currentName,role }) => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             <li>
-              <Link to="/UserInfo" onClick={()=> Navigate("/UserInfo")} className="justify-between">{`Welcome ${currentName}`}</Link>
+              <Link
+                to="/UserInfo"
+                onClick={() => navigate("/UserInfo")}
+                className="justify-between"
+              >{`Welcome ${currentName}`}</Link>
             </li>
             <li>
-              <Link to="/Dashboard" className="justify-between" onClick={()=> Navigate("/Dashboard")}>Dashboard</Link>
+              <Link
+                to="/Dashboard"
+                className={`${
+                  role === "admin" ? "block justify-between" : "hidden"
+                }`}
+                onClick={() => navigate("/Dashboard")}
+              >
+                Dashboard
+              </Link>
             </li>
             <li>
               <Link
                 onClick={() => {
                   localStorage.clear();
                   setLoggedFlag(false);
+                  navigate("/");
                 }}
               >
                 Signout
@@ -79,8 +131,15 @@ const MainNavbar = ({ loggedFlag, setLoggedFlag, currentName,role }) => {
           </ul>
         </div>
 
-        <Button className="bg-[#0F172A]">
-          <IoMoon />
+        <Button
+          className="bg-[#014026] dark:bg-[#0F172A]"
+          onClick={mode === "light" ? setDark : setLight}
+        >
+          {mode == "light" ? (
+            <IoMoon onClick={setDark} />
+          ) : (
+            <IoSunny onClick={setLight} />
+          )}
         </Button>
         <div className="lg:hidden block bg-[#757575]">
           <Menu>

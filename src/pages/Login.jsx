@@ -24,8 +24,7 @@ const Login = ({ users, setLoggedFlag, loggedFlag, role }) => {
     password: "",
   });
   const navigate = useNavigate();
-
-  const [currentName, setName] = useState("");
+  
   const [flag, setFlag] = useState(true);
   const checkLogin = (e) => {
     e.preventDefault();
@@ -37,9 +36,8 @@ const Login = ({ users, setLoggedFlag, loggedFlag, role }) => {
 
     if (checkUser) {
       localStorage.gi = checkUser.id;
-      setName(checkUser.username);
+
       setLoggedFlag(true);
-      console.log(checkUser.role);
       navigate("/");
     } else {
       setFlag(false);
@@ -48,12 +46,6 @@ const Login = ({ users, setLoggedFlag, loggedFlag, role }) => {
 
   return (
     <div>
-      <MainNavbar
-        loggedFlag={loggedFlag}
-        setLoggedFlag={setLoggedFlag}
-        currentName={currentName}
-        role={role}
-      />
       <Card
         color="transparent"
         shadow={false}
@@ -108,7 +100,6 @@ const Login = ({ users, setLoggedFlag, loggedFlag, role }) => {
           </Typography>
         </form>
       </Card>
-      <MainFooter />
     </div>
   );
 };

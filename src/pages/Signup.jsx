@@ -16,7 +16,6 @@ const Signup = () => {
   const navigate = useNavigate();
   return (
     <div>
-      <MainNavbar />
       <Card
         color="transparent"
         shadow={false}
@@ -43,7 +42,7 @@ const Signup = () => {
             <Link
               to="/Login"
               className="font-bold text-red-500"
-              onClick={()=>{
+              onClick={() => {
                 navigate("/Login");
               }}
             >
@@ -52,7 +51,6 @@ const Signup = () => {
           </Typography>
         </form>
       </Card>
-      <MainFooter />
     </div>
   );
 };

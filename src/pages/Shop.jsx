@@ -1,9 +1,12 @@
 import React from "react";
+import MainNavbar from "../components/MainNavbar";
+import MainFooter from "../components/MainFooter";
+import ShopContent from "../components/ShopContent";
 
-const Shop = () => {
+const Shop = ({ allProducts, addToCart, cartNum }) => {
   return (
     <div>
-      <h1>shop</h1>
+      <ShopContent allProducts={allProducts} addToCart={addToCart} />
     </div>
   );
 };
