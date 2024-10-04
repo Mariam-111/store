@@ -1,5 +1,20 @@
 {
-  "users": {},
+  "users": [
+    {
+      "username": "manjjo",
+      "email": "omnia@gmail.com",
+      "password": "123456",
+      "role" : "admin",
+      "id": 1
+    },
+    {
+      "username": "jasmine",
+      "email": "jas@gmail.com",
+      "password": "123456",
+      "role" : "user",
+      "id": 2
+    }
+  ],
   "products": [
     {
       "id": 1,
