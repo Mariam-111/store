@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../images/mainAssets/logo.png";
 import {
   Menu,
@@ -11,9 +11,10 @@ import {
 import { BsCart4 } from "react-icons/bs";
 import { IoMoon, IoSunny, IoMenu, IoClose } from "react-icons/io5";
 
-const MainNavbar = () => {
 
-  const [mode, setMode] = useState("light");
+const MainNavbar = ({ cartNum }) => {
+  const navigate = useNavigate();
+   const [mode, setMode] = useState("light");
 
   const setDark = () => {
 
@@ -40,7 +41,6 @@ const MainNavbar = () => {
     };
   }, [mode]);
 
-
   return (
     <div className="flex md:flex-row flex-col justify-between bg-white dark:bg-[#4a4a4a] p-4">
       <div>
@@ -63,11 +63,20 @@ const MainNavbar = () => {
         </div>
       </div>
       <div className="flex gap-3">
-        <Button className="bg-[#014026] dark:bg-[#0F172A]">
-          <BsCart4 />
-        </Button>
+        <div className="relative inline-flex">
+          <button
+            className="bg-[#014026] dark:bg-[#0F172A] font-sans font-bold text-center px-6 rounded-lg text-white active:opacity-[0.85] py-2"
+            type="button"
+            onClick={() => navigate("/cart")}
+          >
+            <BsCart4 />
+          </button>
+          <span className="absolute rounded-full p-1 text-xs content-[''] grid place-items-center top-[4%] right-[2%] translate-x-2/4 -translate-y-2/4  min-w-[24px] min-h-[24px] bg-red-400 text-white font-bold">
+            {cartNum}
+          </span>
+        </div>
         <Button className="bg-[#014026] dark:bg-[#0F172A]">Login</Button>
-        <Button className="bg-[#014026] dark:bg-[#0F172A]"
+       <Button className="bg-[#014026] dark:bg-[#0F172A]"
           onClick={mode === "light" ? setDark : setLight}
         >
           {
