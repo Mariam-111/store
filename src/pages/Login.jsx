@@ -14,17 +14,14 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
-import MainNavbar from "../components/MainNavbar";
-import MainFooter from "../components/MainFooter";
-import Signup from "./Signup";
 
-const Login = ({ users, setLoggedFlag, loggedFlag, role }) => {
+const Login = ({ users, setLoggedFlag }) => {
   const [loggedUser, setLoggedUser] = useState({
     email: "",
     password: "",
   });
   const navigate = useNavigate();
-  
+
   const [flag, setFlag] = useState(true);
   const checkLogin = (e) => {
     e.preventDefault();

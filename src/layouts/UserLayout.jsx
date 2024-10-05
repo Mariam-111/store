@@ -20,6 +20,7 @@ const UserLayout = ({
   setLoggedFlag,
   currentName,
   role,
+  postUser,
 }) => {
   return (
     <div>
@@ -66,7 +67,10 @@ const UserLayout = ({
             />
           }
         />
-        <Route path="/Signup" element={<Signup />} />
+        <Route
+          path="/Signup"
+          element={<Signup users={users} postUser={postUser} />}
+        />
         <Route path="/UserInfo" element={<UserInfo />} />
       </Routes>
       <MainFooter />
