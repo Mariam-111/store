@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import logo from "../images/mainAssets/logo.png";
 import {
   Menu,
@@ -11,34 +11,35 @@ import {
 import { BsCart4 } from "react-icons/bs";
 import { IoMoon, IoSunny, IoMenu, IoClose } from "react-icons/io5";
 
-
-const MainNavbar = ({ cartNum }) => {
+const MainNavbar = ({
+  loggedFlag,
+  setLoggedFlag,
+  currentName,
+  role,
+  cartNum,
+}) => {
   const navigate = useNavigate();
-   const [mode, setMode] = useState("light");
+  const [mode, setMode] = useState("light");
 
   const setDark = () => {
-
     localStorage.theme = mode;
     setMode("dark");
-    
-  }
+  };
   const setLight = () => {
-    
     localStorage.theme = mode;
     setMode("light");
-
-  }
+  };
 
   useEffect(() => {
     if (
-      localStorage.theme === 'dark' ||
-      (!('theme' in localStorage) &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches)
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
     ) {
-      document.documentElement.classList.add('dark');
+      document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.classList.remove('dark');
-    };
+      document.documentElement.classList.remove("dark");
+    }
   }, [mode]);
 
   return (
@@ -75,17 +76,70 @@ const MainNavbar = ({ cartNum }) => {
             {cartNum}
           </span>
         </div>
-        <Button className="bg-[#014026] dark:bg-[#0F172A]">Login</Button>
-       <Button className="bg-[#014026] dark:bg-[#0F172A]"
+        <Link to="/Login" className={`${loggedFlag ? "hidden" : "block"}`}>
+          <Button className="bg-[#014026] dark:bg-[#0F172A]">Login</Button>
+        </Link>
+
+        <div
+          className={`${loggedFlag ? "block dropdown dropdown-end" : "hidden"}`}
+        >
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-circle avatar"
+          >
+            <div className="w-10 rounded-full">
+              <img
+                alt="Tailwind CSS Navbar component"
+                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+              />
+            </div>
+          </div>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+          >
+            <li>
+              <Link
+                to="/UserInfo"
+                onClick={() => navigate("/UserInfo")}
+                className="justify-between"
+              >{`Welcome ${currentName}`}</Link>
+            </li>
+            <li>
+              <Link
+                to="/Dashboard"
+                className={`${
+                  role === "admin" ? "block justify-between" : "hidden"
+                }`}
+                onClick={() => navigate("/Dashboard")}
+              >
+                Dashboard
+              </Link>
+            </li>
+            <li>
+              <Link
+                onClick={() => {
+                  localStorage.clear();
+                  setLoggedFlag(false);
+                  navigate("/");
+                }}
+              >
+                Signout
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        <Button
+          className="bg-[#014026] dark:bg-[#0F172A]"
           onClick={mode === "light" ? setDark : setLight}
         >
-          {
-            mode == "light" ? (
-              <IoMoon onClick={setDark}/>
-            ) : (
-              <IoSunny onClick={setLight}/>
-            )
-         }
+          {mode == "light" ? (
+            <IoMoon onClick={setDark} />
+          ) : (
+            <IoSunny onClick={setLight} />
+          )}
         </Button>
         <div className="lg:hidden block bg-[#757575]">
           <Menu>

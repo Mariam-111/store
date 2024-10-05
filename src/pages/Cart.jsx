@@ -6,9 +6,7 @@ import MainFooter from "../components/MainFooter";
 const Cart = ({ cartItems, cartNum, setCartItems }) => {
   return (
     <div>
-      <MainNavbar cartNum={cartNum} />
       <CartContent cartItems={cartItems} setCartItems={setCartItems} />
-      <MainFooter />
     </div>
   );
 };

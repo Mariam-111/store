@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axios, { all } from "axios";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import Home from "./pages/Home";
-import Shop from "./pages/Shop";
-import Cart from "./pages/Cart";
+import axios from "axios";
+import { Route, Routes } from "react-router-dom";
+import UserLayout from "./layouts/UserLayout";
+import AdminLayout from "./layouts/AdminLayout";
 
 const App = () => {
   const [allProducts, setAllProducts] = useState([]);
@@ -22,6 +21,36 @@ const App = () => {
   useEffect(() => {
     getAllProducts();
   }, []);
+
+  const [users, setUsers] = useState([]);
+  const getUsers = () => {
+    axios({
+      method: "get",
+      url: `http://localhost:3000/users`,
+    }).then((res) => {
+      setUsers(res.data);
+    });
+  };
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  const [loggedFlag, setLoggedFlag] = useState(false);
+  const [currentName, setName] = useState("");
+
+  const [currentUser, setCurrentUser] = useState({});
+  const getCurrentUser = () => {
+    axios({
+      method: "get",
+      url: `http://localhost:3000/users/${localStorage.gi}`,
+    }).then((res) => {
+      setCurrentUser(res.data);
+      setName(res.data.username);
+    });
+  };
+  useEffect(() => {
+    loggedFlag ? getCurrentUser() : localStorage.gi && setLoggedFlag(true);
+  }, [loggedFlag]);
 
   const addToCart = (product) => {
     const existsInCart = cartItems.some((item) => item.id === product.id);
@@ -47,28 +76,25 @@ const App = () => {
     <div>
       <Routes>
         <Route
-          path="/"
-          element={<Home allProducts={allProducts} cartNum={cartNum} />}
-        />
-        <Route
-          path="/shop"
+          path="/*"
           element={
-            <Shop
+            <UserLayout
               allProducts={allProducts}
-              addToCart={addToCart}
               cartNum={cartNum}
+              addToCart={addToCart}
+              cartItems={cartItems}
+              setCartItems={setCartItems}
+              users={users}
+              loggedFlag={loggedFlag}
+              setLoggedFlag={setLoggedFlag}
+              currentName={currentName}
+              role={currentUser.role}
             />
           }
         />
         <Route
-          path="/cart"
-          element={
-            <Cart
-              cartItems={cartItems}
-              cartNum={cartNum}
-              setCartItems={setCartItems}
-            />
-          }
+          path="/admin/*"
+          element={currentUser.role === "admin" && <AdminLayout />}
         />
       </Routes>
     </div>
