@@ -3,11 +3,13 @@ import { BsCart4 } from "react-icons/bs";
 import cartImg from "../images/cart/undraw_empty_cart_co35.svg";
 import { Button } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
+import { AiFillDelete } from "react-icons/ai";
 
-const CartContent = ({ cartItems, setCartItems }) => {
+const CartContent = ({ cartItems, setCartItems, deleteProduct }) => {
   const navigate = useNavigate();
   const [subTotal, setSubTotal] = useState(0);
   const [taxes, setTaxes] = useState(0);
+  const [isHover, setIsHover] = useState(false);
 
   const minusOperation = (id) => {
     setCartItems((prevItems) =>
@@ -103,7 +105,10 @@ const CartContent = ({ cartItems, setCartItems }) => {
           <div className="flex justify-evenly md:flex-row flex-col gap-5">
             <div className="flex flex-col gap-5">
               {cartItems.map((item, indx) => (
-                <div key={indx}>
+                <div
+                  key={indx}
+                  className="flex justify-around flex-col items-center md:flex-row"
+                >
                   <div className="flex flex-row bg-white gap-6 shadow-md p-6 justify-evenly mx-3">
                     <div>
                       <p className="text-[1rem] font-bold">Product</p>
@@ -147,6 +152,9 @@ const CartContent = ({ cartItems, setCartItems }) => {
                       </p>
                     </div>
                   </div>
+                  <button onClick={() => deleteProduct(item)}>
+                    <AiFillDelete />
+                  </button>
                 </div>
               ))}
             </div>

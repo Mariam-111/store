@@ -8,8 +8,6 @@ import {
   Select,
   Option,
 } from "@material-tailwind/react";
-import MainNavbar from "../components/MainNavbar";
-import MainFooter from "../components/MainFooter";
 import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {

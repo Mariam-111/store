@@ -1,22 +1,6 @@
-import React, { useEffect, useState } from "react";
-import {
-  Link,
-  Navigate,
-  NavLink,
-  useNavigate,
-  Route,
-  Routes,
-} from "react-router-dom";
-import {
-  Card,
-  Input,
-  Checkbox,
-  Button,
-  Typography,
-} from "@material-tailwind/react";
-import MainNavbar from "../components/MainNavbar";
-import MainFooter from "../components/MainFooter";
-import Signup from "./Signup";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Card, Input, Button, Typography } from "@material-tailwind/react";
 
 const Login = ({ users, setLoggedFlag, loggedFlag, role }) => {
   const [loggedUser, setLoggedUser] = useState({
@@ -24,7 +8,7 @@ const Login = ({ users, setLoggedFlag, loggedFlag, role }) => {
     password: "",
   });
   const navigate = useNavigate();
-  
+
   const [flag, setFlag] = useState(true);
   const checkLogin = (e) => {
     e.preventDefault();
