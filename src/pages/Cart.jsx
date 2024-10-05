@@ -1,12 +1,14 @@
 import React from "react";
-import MainNavbar from "../components/MainNavbar";
 import CartContent from "../components/CartContent";
-import MainFooter from "../components/MainFooter";
 
-const Cart = ({ cartItems, cartNum, setCartItems }) => {
+const Cart = ({ cartItems, setCartItems, deleteProduct }) => {
   return (
     <div>
-      <CartContent cartItems={cartItems} setCartItems={setCartItems} />
+      <CartContent
+        cartItems={cartItems}
+        setCartItems={setCartItems}
+        deleteProduct={deleteProduct}
+      />
     </div>
   );
 };

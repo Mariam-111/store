@@ -15,6 +15,7 @@ const UserLayout = ({
   cartNum,
   cartItems,
   setCartItems,
+  deleteProduct,
   users,
   loggedFlag,
   setLoggedFlag,
@@ -31,27 +32,18 @@ const UserLayout = ({
         cartNum={cartNum}
       />
       <Routes>
-        <Route
-          path="/"
-          element={<Home allProducts={allProducts} cartNum={cartNum} />}
-        />
+        <Route path="/" element={<Home allProducts={allProducts} />} />
         <Route
           path="/shop"
-          element={
-            <Shop
-              allProducts={allProducts}
-              addToCart={addToCart}
-              cartNum={cartNum}
-            />
-          }
+          element={<Shop allProducts={allProducts} addToCart={addToCart} />}
         />
         <Route
           path="/cart"
           element={
             <Cart
               cartItems={cartItems}
-              cartNum={cartNum}
               setCartItems={setCartItems}
+              deleteProduct={deleteProduct}
             />
           }
         />
