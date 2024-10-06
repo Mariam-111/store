@@ -9,6 +9,10 @@ const App = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [cartNum, setCartNum] = useState(0);
+  const [users, setUsers] = useState([]);
+  const [loggedFlag, setLoggedFlag] = useState(false);
+  const [currentName, setName] = useState("");
+  const [currentUser, setCurrentUser] = useState({});
 
   const getAllProducts = () => {
     axios({
@@ -19,50 +23,6 @@ const App = () => {
     });
   };
 
-  useEffect(() => {
-    getAllProducts();
-  }, []);
-
-  const [users, setUsers] = useState([]);
-  const getUsers = () => {
-    axios({
-      method: "get",
-      url: `http://localhost:3000/users`,
-    }).then((res) => {
-      setUsers(res.data);
-    });
-  };
-  useEffect(() => {
-    getUsers();
-  }, []);
-
-  const [loggedFlag, setLoggedFlag] = useState(false);
-  const [currentName, setName] = useState("");
-
-  const [currentUser, setCurrentUser] = useState({});
-  const getCurrentUser = () => {
-    axios({
-      method: "get",
-      url: `http://localhost:3000/users/${localStorage.gi}`,
-    }).then((res) => {
-      setCurrentUser(res.data);
-      setName(res.data.username);
-    });
-  };
-  useEffect(() => {
-    loggedFlag ? getCurrentUser() : localStorage.gi && setLoggedFlag(true);
-  }, [loggedFlag]);
-
-  const postUser = (d) => {
-    axios({
-      method: "post",
-      url: "http://localhost:3000/users",
-      data: d,
-    }).then((res) => {
-      getUsers();
-      navigate("/Login");
-    });
-  };
   const addToCart = (product) => {
     const existsInCart = cartItems.some((item) => item.id === product.id);
     const existingItemIndex = cartItems.findIndex(
@@ -83,6 +43,53 @@ const App = () => {
     }
   };
 
+  const deleteProduct = (product) => {
+    const deletedIndex = cartItems.findIndex((item) => item.id === product.id);
+    setCartItems((prevItems) =>
+      prevItems.filter((item, indx) => deletedIndex != indx)
+    );
+    setCartNum((prevNum) => prevNum - 1);
+  };
+
+  const getUsers = () => {
+    axios({
+      method: "get",
+      url: `${import.meta.env.VITE_API}/users`,
+    }).then((res) => {
+      setUsers(res.data);
+    });
+  };
+
+  const getCurrentUser = () => {
+    axios({
+      method: "get",
+      url: `${import.meta.env.VITE_API}/users/${localStorage.gi}`,
+    }).then((res) => {
+      setCurrentUser(res.data);
+      setName(res.data.username);
+    });
+  };
+
+  useEffect(() => {
+    getAllProducts();
+    getUsers();
+  }, []);
+
+  useEffect(() => {
+    loggedFlag ? getCurrentUser() : localStorage.gi && setLoggedFlag(true);
+  }, [loggedFlag]);
+  
+    const postUser = (d) => {
+    axios({
+      method: "post",
+      url: "http://localhost:3000/users",
+      data: d,
+    }).then((res) => {
+      getUsers();
+      navigate("/Login");
+    });
+  };
+
   return (
     <div>
       <Routes>
@@ -95,6 +102,7 @@ const App = () => {
               addToCart={addToCart}
               cartItems={cartItems}
               setCartItems={setCartItems}
+              deleteProduct={deleteProduct}
               users={users}
               loggedFlag={loggedFlag}
               setLoggedFlag={setLoggedFlag}
