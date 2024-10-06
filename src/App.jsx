@@ -70,6 +70,17 @@ const App = () => {
     });
   };
 
+  const postUser = (d) => {
+    axios({
+      method: "post",
+      url: `${import.meta.env.VITE_API}/users`,
+      data: d,
+    }).then((res) => {
+      getUsers();
+      navigate("/Login");
+    });
+  };
+
   useEffect(() => {
     getAllProducts();
     getUsers();
@@ -78,17 +89,6 @@ const App = () => {
   useEffect(() => {
     loggedFlag ? getCurrentUser() : localStorage.gi && setLoggedFlag(true);
   }, [loggedFlag]);
-  
-    const postUser = (d) => {
-    axios({
-      method: "post",
-      url: "http://localhost:3000/users",
-      data: d,
-    }).then((res) => {
-      getUsers();
-      navigate("/Login");
-    });
-  };
 
   return (
     <div>
