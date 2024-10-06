@@ -1,8 +1,23 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Card, Input, Button, Typography } from "@material-tailwind/react";
 
-const Login = ({ users, setLoggedFlag, loggedFlag, role }) => {
+import React, { useEffect, useState } from "react";
+import {
+  Link,
+  Navigate,
+  NavLink,
+  useNavigate,
+  Route,
+  Routes,
+} from "react-router-dom";
+import {
+  Card,
+  Input,
+  Checkbox,
+  Button,
+  Typography,
+} from "@material-tailwind/react";
+
+
+const Login = ({ users, setLoggedFlag }) => {
   const [loggedUser, setLoggedUser] = useState({
     email: "",
     password: "",

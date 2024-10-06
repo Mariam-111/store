@@ -122,8 +122,8 @@ const MainNavbar = ({
                 onClick={() => {
                   localStorage.clear();
                   setLoggedFlag(false);
-                  navigate("/");
                 }}
+                to="/"
               >
                 Signout
               </Link>

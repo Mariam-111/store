@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import UserLayout from "./layouts/UserLayout";
 import AdminLayout from "./layouts/AdminLayout";
 
 const App = () => {
+  const navigate = useNavigate();
   const [allProducts, setAllProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [cartNum, setCartNum] = useState(0);
@@ -77,6 +78,17 @@ const App = () => {
   useEffect(() => {
     loggedFlag ? getCurrentUser() : localStorage.gi && setLoggedFlag(true);
   }, [loggedFlag]);
+  
+    const postUser = (d) => {
+    axios({
+      method: "post",
+      url: "http://localhost:3000/users",
+      data: d,
+    }).then((res) => {
+      getUsers();
+      navigate("/Login");
+    });
+  };
 
   return (
     <div>
@@ -96,6 +108,7 @@ const App = () => {
               setLoggedFlag={setLoggedFlag}
               currentName={currentName}
               role={currentUser.role}
+              postUser={postUser}
             />
           }
         />
