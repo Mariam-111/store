@@ -8,11 +8,18 @@ const App = () => {
   const navigate = useNavigate();
   const [allProducts, setAllProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
-  const [cartNum, setCartNum] = useState(0);
+  const [cartNum, setCartNum] = useState(cartItems.length);
+  const [isAddedLocal, setIsAddedLocal] = useState(false);
   const [users, setUsers] = useState([]);
   const [loggedFlag, setLoggedFlag] = useState(false);
   const [currentName, setName] = useState("");
   const [currentUser, setCurrentUser] = useState({});
+
+  const addedLocalCart = () => {
+    if (cartItems.length != 0) {
+      localStorage.it = JSON.stringify(cartItems);
+    }
+  };
 
   const getAllProducts = () => {
     axios({
@@ -28,18 +35,23 @@ const App = () => {
     const existingItemIndex = cartItems.findIndex(
       (item) => item.id === product.id
     );
+    setIsAddedLocal(false);
 
-    if (!existsInCart) {
-      setCartItems((prevItems) => [...prevItems, { ...product, counter: 1 }]);
-      setCartNum((prevNum) => prevNum + 1);
+    if (loggedFlag) {
+      if (!existsInCart) {
+        setCartItems((prevItems) => [...prevItems, { ...product, counter: 1 }]);
+      } else {
+        setCartItems((prevItems) =>
+          prevItems.map((item, index) =>
+            index === existingItemIndex
+              ? { ...item, counter: item.counter + 1 }
+              : item
+          )
+        );
+      }
+      setIsAddedLocal(true);
     } else {
-      setCartItems((prevItems) =>
-        prevItems.map((item, index) =>
-          index === existingItemIndex
-            ? { ...item, counter: item.counter + 1 }
-            : item
-        )
-      );
+      navigate("/login");
     }
   };
 
@@ -48,7 +60,6 @@ const App = () => {
     setCartItems((prevItems) =>
       prevItems.filter((item, indx) => deletedIndex != indx)
     );
-    setCartNum((prevNum) => prevNum - 1);
   };
 
   const getUsers = () => {
@@ -87,6 +98,22 @@ const App = () => {
   }, []);
 
   useEffect(() => {
+    addedLocalCart();
+  }, [addToCart]);
+
+  useEffect(() => {
+    setCartNum(cartItems.length);
+  }, [cartItems]);
+
+  useEffect(() => {
+    const savedCartItems = localStorage.it;
+    if (savedCartItems) {
+      setCartItems(JSON.parse(savedCartItems));
+      setCartNum(cartItems.length);
+    }
+  }, []);
+
+  useEffect(() => {
     loggedFlag ? getCurrentUser() : localStorage.gi && setLoggedFlag(true);
   }, [loggedFlag]);
 
@@ -99,10 +126,12 @@ const App = () => {
             <UserLayout
               allProducts={allProducts}
               cartNum={cartNum}
+              setCartNum={setCartNum}
               addToCart={addToCart}
               cartItems={cartItems}
               setCartItems={setCartItems}
               deleteProduct={deleteProduct}
+              addedLocalCart={addedLocalCart}
               users={users}
               loggedFlag={loggedFlag}
               setLoggedFlag={setLoggedFlag}

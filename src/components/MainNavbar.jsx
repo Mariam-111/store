@@ -17,6 +17,7 @@ const MainNavbar = ({
   currentName,
   role,
   cartNum,
+  setCartItems,
 }) => {
   const navigate = useNavigate();
   const [mode, setMode] = useState("light");
@@ -108,11 +109,10 @@ const MainNavbar = ({
             </li>
             <li>
               <Link
-                to="/Dashboard"
+                to="/admin/Dashboard"
                 className={`${
                   role === "admin" ? "block justify-between" : "hidden"
                 }`}
-                onClick={() => navigate("/Dashboard")}
               >
                 Dashboard
               </Link>
@@ -122,6 +122,7 @@ const MainNavbar = ({
                 onClick={() => {
                   localStorage.clear();
                   setLoggedFlag(false);
+                  setCartItems([]);
                 }}
                 to="/"
               >

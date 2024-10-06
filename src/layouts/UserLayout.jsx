@@ -16,6 +16,7 @@ const UserLayout = ({
   cartItems,
   setCartItems,
   deleteProduct,
+  addedLocalCart,
   users,
   loggedFlag,
   setLoggedFlag,
@@ -31,6 +32,7 @@ const UserLayout = ({
         currentName={currentName}
         role={role}
         cartNum={cartNum}
+        setCartItems={setCartItems}
       />
       <Routes>
         <Route path="/" element={<Home allProducts={allProducts} />} />
@@ -45,6 +47,8 @@ const UserLayout = ({
               cartItems={cartItems}
               setCartItems={setCartItems}
               deleteProduct={deleteProduct}
+              loggedFlag={loggedFlag}
+              addedLocalCart={addedLocalCart}
             />
           }
         />
