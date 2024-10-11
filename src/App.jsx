@@ -3,6 +3,7 @@ import axios from "axios";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import UserLayout from "./layouts/UserLayout";
 import AdminLayout from "./layouts/AdminLayout";
+import AllUsers from "./pages/AllUsers";
 
 const App = () => {
   const navigate = useNavigate();
@@ -63,6 +64,19 @@ const App = () => {
       navigate("/Login");
     });
   };
+  const makeAdmin = (id) =>{
+      let newUsers = users.map((u) => {
+        if(u.id == id){ u.role = "admin"; console.log("done")};
+        return u;
+      });
+      setUsers(newUsers);
+      axios({
+        method: "patch",
+        url: "http://localhost:3000/users",
+        data: users,
+      }).then((res)=>console.log(res.data))
+  }
+
   const addToCart = (product) => {
     const existsInCart = cartItems.some((item) => item.id === product.id);
     const existingItemIndex = cartItems.findIndex(
@@ -106,8 +120,10 @@ const App = () => {
         />
         <Route
           path="/admin/*"
-          element={currentUser.role === "admin" && <AdminLayout />}
+          element={<AdminLayout />}
+          // element={currentUser.role === "admin" ? <AdminLayout /> : <Navigate to="/"/>}
         />
+        <Route path="/admin/AllUsers" element={<AllUsers users={users} makeAdmin={makeAdmin} />}/>
       </Routes>
     </div>
   );
