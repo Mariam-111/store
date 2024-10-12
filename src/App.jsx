@@ -10,6 +10,7 @@ import ShowUser from "./pages/showUser";
 const App = () => {
   const navigate = useNavigate();
   const [allProducts, setAllProducts] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
   const [cartNum, setCartNum] = useState(cartItems.length);
   const [isAddedLocal, setIsAddedLocal] = useState(false);
   const [users, setUsers] = useState([]);
