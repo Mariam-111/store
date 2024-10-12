@@ -8,7 +8,9 @@ const AdminLayout = () => {
     <div>
       admin layout
       <br />
-      <Link to="AllUsers">View users</Link>
+      <Link to="AllUsers" className="bg-blue-800">
+        View users
+      </Link>
       {/* <Routes>
         <Route path="AllUsers" element={<AllUsers />} />
       </Routes> */}

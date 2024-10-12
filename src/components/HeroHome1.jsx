@@ -3,7 +3,6 @@ import { Button } from "@material-tailwind/react";
 import banner1 from "../images/hero2/banner-1.jpg";
 import banner2 from "../images/hero2/banner-2.jpg";
 import banner3 from "../images/hero2/banner-3.jpg";
-import { all } from "axios";
 
 const HeroHome1 = ({ allProducts }) => {
   return (

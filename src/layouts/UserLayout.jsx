@@ -15,12 +15,20 @@ const UserLayout = ({
   cartNum,
   cartItems,
   setCartItems,
+  deleteProduct,
+  addedLocalCart,
   users,
   loggedFlag,
   setLoggedFlag,
   currentName,
   role,
   postUser,
+  newUser,
+  setnewUser,
+  userData,
+  errors,
+  setErrors,
+  validate,
 }) => {
   return (
     <div>
@@ -30,29 +38,23 @@ const UserLayout = ({
         currentName={currentName}
         role={role}
         cartNum={cartNum}
+        setCartItems={setCartItems}
       />
       <Routes>
-        <Route
-          path="/"
-          element={<Home allProducts={allProducts} cartNum={cartNum} />}
-        />
+        <Route path="/" element={<Home allProducts={allProducts} />} />
         <Route
           path="/shop"
-          element={
-            <Shop
-              allProducts={allProducts}
-              addToCart={addToCart}
-              cartNum={cartNum}
-            />
-          }
+          element={<Shop allProducts={allProducts} addToCart={addToCart} />}
         />
         <Route
           path="/cart"
           element={
             <Cart
               cartItems={cartItems}
-              cartNum={cartNum}
               setCartItems={setCartItems}
+              deleteProduct={deleteProduct}
+              loggedFlag={loggedFlag}
+              addedLocalCart={addedLocalCart}
             />
           }
         />
@@ -69,7 +71,12 @@ const UserLayout = ({
         />
         <Route
           path="/Signup"
-          element={<Signup users={users} postUser={postUser} />}
+          element={<Signup users={users} postUser={postUser} newUser={newUser}
+          setnewUser={setnewUser}
+          userData={userData}
+          errors={errors}
+          setErrors={setErrors}
+          validate={validate} />}
         />
         <Route path="/UserInfo" element={<UserInfo />} />
       </Routes>
