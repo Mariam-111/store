@@ -4,16 +4,16 @@ import { Button } from "@material-tailwind/react";
 
 const ShopContent = ({ allProducts, addToCart }) => {
   return (
-    <div className="mb-10">
-      <div className="text-[#1565C0] font-bold m-10 text-center underline underline-offset-4 leading-9 text-[1.875rem] p-10">
+    <div className="p-10 bg-[#eeeeee] dark:bg-[#0F172A]">
+      <div className="text-[#1565C0] font-bold m-10 text-center underline underline-offset-4 leading-9 text-[1.875rem] p-10 ">
         P R O D U C T S
       </div>
 
-      <div className="flex flex-col md:flex-row flex-wrap gap-10 mt-16 px-10 justify-evenly">
+      <div className="flex flex-col md:flex-row flex-wrap gap-10 mt-16 px-10 justify-evenly ">
         {allProducts.map((product) => (
           <div
             key={product.id}
-            className="bg-[#B0BEC5] p-10 w-72 transition-transform transform hover:scale-105 hover:z-10 
+            className="bg-[#B0BEC5] dark:bg-gray-700 text-black dark:text-white p-10 w-72 transition-transform transform hover:scale-105 hover:z-10 
                         rounded-xl shadow-lg flex justify-center items-center font-sans gap-2 flex-col"
           >
             <img src={product.image} alt="" className="h-[10em] w-[10em]" />
@@ -26,7 +26,7 @@ const ShopContent = ({ allProducts, addToCart }) => {
                 <div className="flex justify-between items-center">
                   <span>${product.price}</span>
                   <Button
-                    className="bg-[#2632381A]"
+                    className="bg-[#2632381A] dark:bg-white"
                     onClick={() => addToCart(product)}
                   >
                     <BsCart4 className="text-black" />

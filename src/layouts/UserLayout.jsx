@@ -23,6 +23,9 @@ const UserLayout = ({
   currentName,
   role,
   postUser,
+  currentUser, // Receiving currentUser
+  setCurrentUser, // Receiving setCurrentUser
+
   newUser,
   setnewUser,
   userData,
@@ -78,7 +81,15 @@ const UserLayout = ({
           setErrors={setErrors}
           validate={validate} />}
         />
-        <Route path="/UserInfo" element={<UserInfo />} />
+        <Route
+          path="/userinfo"
+          element={
+            <UserInfo
+              currentUser={currentUser} // Passing currentUser
+              setCurrentUser={setCurrentUser} // Passing setCurrentUser
+            />
+          }
+        />
       </Routes>
       <MainFooter />
     </div>

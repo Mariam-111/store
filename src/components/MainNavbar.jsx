@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../images/mainAssets/logo.png";
+import footerLogo from "../images/mainAssets/footer-logo.png";
 import {
   Menu,
   MenuHandler,
@@ -18,16 +19,20 @@ const MainNavbar = ({
   role,
   cartNum,
   setCartItems,
+  
 }) => {
   const navigate = useNavigate();
-  const [mode, setMode] = useState("light");
+  
+  const [mode, setMode] = useState(() => {
+    return localStorage.theme === "dark" ? "dark" : "light";
+  });
 
   const setDark = () => {
-    localStorage.theme = mode;
+    localStorage.theme = "dark";
     setMode("dark");
   };
   const setLight = () => {
-    localStorage.theme = mode;
+    localStorage.theme = "light";
     setMode("light");
   };
 
@@ -42,23 +47,28 @@ const MainNavbar = ({
       document.documentElement.classList.remove("dark");
     }
   }, [mode]);
+  
 
   return (
-    <div className="flex md:flex-row flex-col justify-between bg-white dark:bg-[#4a4a4a] p-4">
+    <div className="flex flex-wrap items-center justify-between bg-[#eeeeee] dark:bg-[#0F172A] p-4">
       <div>
-        <img src={logo} alt="Logo" className="py-5 md:p-0" />
+        <img
+          src={mode === "dark" ? footerLogo : logo}
+          alt="Logo"
+          className="py-5 md:p-0"
+        />
       </div>
       <div className="lg:block hidden">
         <div className="flex gap-3 ">
           <Link
             to="/"
-            className="hover:border-solid hover:border-red-800 hover:border-b-4"
+            className="block antialiased font-sans text-xl leading-relaxed text-black dark:text-white p-1 font-medium hover:border-b-4 hover:border-red-700 transition-all"
           >
             Home
           </Link>
           <Link
             to="/shop"
-            className="hover:border-solid hover:border-red-800 hover:border-b-4"
+            className="block antialiased font-sans text-xl leading-relaxed text-black dark:text-white p-1 font-medium hover:border-b-4 hover:border-red-700 transition-all"
           >
             Shop
           </Link>
@@ -67,7 +77,7 @@ const MainNavbar = ({
       <div className="flex gap-3">
         <div className="relative inline-flex">
           <button
-            className="bg-[#014026] dark:bg-[#0F172A] font-sans font-bold text-center px-6 rounded-lg text-white active:opacity-[0.85] py-2"
+            className="bg-[#014026] font-sans font-bold text-center px-6 rounded-lg text-white active:opacity-[0.85] py-2"
             type="button"
             onClick={() => navigate("/cart")}
           >
@@ -78,7 +88,7 @@ const MainNavbar = ({
           </span>
         </div>
         <Link to="/Login" className={`${loggedFlag ? "hidden" : "block"}`}>
-          <Button className="bg-[#014026] dark:bg-[#0F172A]">Login</Button>
+          <Button className="bg-[#014026] ">Login</Button>
         </Link>
 
         <div
@@ -87,18 +97,19 @@ const MainNavbar = ({
           <div
             tabIndex={0}
             role="button"
-            className="btn btn-ghost btn-circle avatar"
+            className="btn btn-ghost btn-circle avatar "
           >
-            <div className="w-10 rounded-full">
+            <div className="w-10 rounded-full border-2 border-black dark:border-white">
               <img
                 alt="Tailwind CSS Navbar component"
+                
                 src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
               />
             </div>
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow "
           >
             <li>
               <Link
@@ -132,14 +143,16 @@ const MainNavbar = ({
         </div>
 
         <Button
-          className="bg-[#014026] dark:bg-[#0F172A]"
+          className="bg-[#0F172A] dark:bg-[#000000] relative flex items-center justify-center w-10 h-10 rounded-lg shadow-md hover:shadow-lg focus:opacity-[0.85] active:opacity-[0.85]"
           onClick={mode === "light" ? setDark : setLight}
         >
-          {mode == "light" ? (
-            <IoMoon onClick={setDark} />
-          ) : (
-            <IoSunny onClick={setLight} />
-          )}
+          <span className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            {mode === "light" ? (
+              <IoMoon className="text-white h-5 w-5" />
+            ) : (
+              <IoSunny className="text-gray h-5 w-5" />
+            )}
+          </span>
         </Button>
         <div className="lg:hidden block bg-[#757575]">
           <Menu>

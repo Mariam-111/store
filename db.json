@@ -4,6 +4,7 @@
       "username": "manjjo",
       "email": "omnia@gmail.com",
       "password": "123456",
+      "gender": "female",
       "role": "admin",
       "gender": "Female",
       "id": 1
@@ -12,6 +13,7 @@
       "username": "jasmine",
       "email": "jas@gmail.com",
       "password": "123456",
+      "gender": "female",
       "role": "user",
       "gender": "Female",
       "id": 2
@@ -20,6 +22,7 @@
       "username": "taylor",
       "email": "taylor@gmail.com",
       "password": "taylor147",
+      "gender": "male",
       "role": "user",
       "gender": "Female",
       "id": 3
@@ -28,6 +31,7 @@
       "username": "mohamed",
       "email": "mo@gmail.com",
       "password": "123456",
+      "gender": "male",
       "role": "user",
       "gender": "Male",
       "id": 4

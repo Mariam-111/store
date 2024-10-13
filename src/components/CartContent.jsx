@@ -56,21 +56,25 @@ const CartContent = ({
   }, [cartItems]);
 
   return (
-    <div className="my-5 min-h-screen">
+    <div className="-5my min-h-screen bg-[#eeeeee] dark:bg-[#0F172A]">
       <div className="flex justify-center gap-4 mb-4">
         <span className="text-3xl text-red-500">
           <BsCart4 />
         </span>
-        <p className="text-[1.5rem] font-bold">Shopping Cart</p>
+        <p className="text-[1.5rem] font-bold text-black dark:text-white">
+          Shopping Cart
+        </p>
       </div>
 
       <div>
         {cartItems.length == 0 || !loggedFlag ? (
-          <div className="flex justify-evenly md:flex-row flex-col gap-5">
-            <div className="flex flex-col justify-center items-center gap-2">
+          <div className="flex justify-evenly md:flex-row flex-col gap-5 ">
+            <div className="flex flex-col justify-center items-center gap-2 ">
               <img src={cartImg} alt="" className="w-52 h-52" />
-              <h1 className="text-[2.25rem] font-bold">Cart's Feeling Light</h1>
-              <p className="text-[#9E9E9E] text-[1.12rem] text-center">
+              <h1 className="text-black dark:text-white text-[2.25rem] font-bold ">
+                Cart's Feeling Light
+              </h1>
+              <p className="text-[#9E9E9E] text-[1.12rem] text-center ">
                 Your cart is longing for some company. begin your <br />{" "}
                 shopping adventure now!
               </p>
@@ -82,8 +86,10 @@ const CartContent = ({
               </Button>
             </div>
 
-            <div className="rounded-lg shadow-md p-6 w-64 h-max">
-              <h2 className="text-lg font-semibold mb-4">Summary</h2>
+            <div className="text-black dark:bg-gray-700 rounded-lg shadow-md p-6 w-64 h-max">
+              <h2 className="text-lg font-semibold mb-4 text-center ">
+                Summary
+              </h2>
               <div className="flex justify-between mb-2">
                 <span>Subtotal</span>
                 <span>$0</span>
@@ -112,14 +118,14 @@ const CartContent = ({
           </div>
         ) : (
           loggedFlag && (
-            <div className="flex justify-evenly md:flex-row flex-col gap-5">
+            <div className="flex justify-evenly md:flex-row flex-col gap-5 ">
               <div className="flex flex-col gap-5">
                 {cartItems.map((item, indx) => (
                   <div
                     key={indx}
-                    className="flex justify-around flex-col items-center md:flex-row"
+                    className="flex justify-around flex-col items-center md:flex-row "
                   >
-                    <div className="flex flex-row bg-white gap-6 shadow-md p-6 justify-evenly mx-3">
+                    <div className="flex flex-row bg-white gap-6 shadow-md p-6 justify-evenly mx-3 bg-[#eeeeee] dark:bg-gray-700 text-black  ">
                       <div>
                         <p className="text-[1rem] font-bold">Product</p>
                         <div className="flex gap-2 py-4">
@@ -168,9 +174,11 @@ const CartContent = ({
                   </div>
                 ))}
               </div>
-              <div className="rounded-lg shadow-md p-6 w-64 h-max">
+              <div className="rounded-lg shadow-md p-6 w-64 h-max text-black dark:bg-gray-700">
                 <div>
-                  <h2 className="text-lg font-semibold mb-4">Summary</h2>
+                  <h2 className="text-lg font-semibold mb-4 text-center">
+                    Summary
+                  </h2>
                   <div className="flex justify-between mb-2">
                     <span>Subtotal</span>
                     <span>${Math.round(subTotal)}</span>

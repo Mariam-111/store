@@ -25,15 +25,13 @@ const Signup = ({ users, postUser,  newUser,
     }
   };
   return (
-    <div>
+    <div className="bg-[#eeeeee] dark:bg-[#0F172A] ">
       <Card
         color="transparent"
         shadow={false}
-        className="flex items-center mt-10"
+        className="flex items-center text-black dark:text-white "
       >
-        <Typography variant="h4" color="blue-gray">
-          SignUp
-        </Typography>
+        <Typography variant="h4">SignUp</Typography>
         <form
           className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
           onSubmit={handleSubmit}

@@ -7,7 +7,7 @@ import banner3 from "../images/hero2/banner-3.jpg";
 const HeroHome1 = ({ allProducts }) => {
   return (
     <div>
-      <div className=" flex items-center flex-col bg-white dark:bg-[#4a4a4a]">
+      <div className=" flex items-center flex-col bg-[#eeeeee] dark:bg-[#0F172A] text-black dark:text-white">
         <div className="bg-[url('images/hero/hero-1.jpg')] bg-cover font-sans w-full h-screen">
           <div className="flex flex-col justify-center h-full w p-10 lg:w-1/3">
             <p className="text-red-600 font-bold py-3">SUMMER COLLECTION</p>
@@ -18,7 +18,7 @@ const HeroHome1 = ({ allProducts }) => {
               A specialist label creating luxury essentials. Ethically crafted
               with an unwavering commitment to exceptional quality
             </p>
-            <Button className="bg-red-600 btn-wide">Shop Now</Button>
+            <Button className="bg-red-600 btn-wide ">Shop Now</Button>
           </div>
         </div>
 
@@ -26,7 +26,7 @@ const HeroHome1 = ({ allProducts }) => {
           <div className="lg:row-start-1 lg:row-end-3">
             <img src={banner2} alt="" />
             <p className="text-[3rem]">Accessories</p>
-            <button className="btn btn-link p-0 text-black font-normal">
+            <button className="btn btn-link p-0 text-black dark:text-white font-normal">
               SHOP NOW
             </button>
           </div>
@@ -35,7 +35,7 @@ const HeroHome1 = ({ allProducts }) => {
             <p className="text-[3rem]">
               Clothing Collections <br /> 2024
             </p>
-            <button className="btn btn-link p-0 text-black font-normal">
+            <button className="btn btn-link p-0 text-black dark:text-white font-normal">
               SHOP NOW
             </button>
           </div>
@@ -44,7 +44,7 @@ const HeroHome1 = ({ allProducts }) => {
             <p className="text-[3rem]">
               Shoes Spring <br /> 2024
             </p>
-            <button className="btn btn-link p-0 text-black font-normal">
+            <button className="btn btn-link p-0 text-black dark:text-white font-normal">
               SHOP NOW
             </button>
           </div>
@@ -58,18 +58,18 @@ const HeroHome1 = ({ allProducts }) => {
       </div>
 
       <div>
-        <div className="flex flex-row flex-wrap p-12 justify-center items-center bg-white dark:bg-[#4a4a4a]">
+        <div className="flex flex-row flex-wrap p-12 justify-center items-center bg-[#eeeeee] dark:bg-[#0F172A]">
           {allProducts.map(
             (product) =>
               product.category == "jewelery" && (
                 <div
                   key={product.id}
-                  className="border-solid border-2 mx-4 p-4 shadow-lg text-center"
+                  className="border-solid  mx-4 p-4 shadow-lg text-center bg-white dark:bg-gray-800 text-[#0F172A] dark:text-white "
                 >
                   <img src={product.image} alt="" className="w-52 h-60" />
                   <p>
                     {product.title.split(" ").slice(0, 3).join(" ")}
-                    <span className="pl-5">${product.price}</span>
+                    <span className="pl-5 ">${product.price}</span>
                   </p>
 
                   <span className="font-bold">{product.rating.rate}</span>
