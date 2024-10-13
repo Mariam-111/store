@@ -9,78 +9,29 @@ import {
 } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
 
-const Signup = ({ users, postUser }) => {
+const Signup = ({ users, postUser,  newUser,
+  setnewUser,
+  userData,
+  errors,
+  setErrors,
+  validate, }) => {
   const navigate = useNavigate();
-  const [newUser, setnewUser] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    gender: "",
-    role: "user",
-  });
-  const { username, email, password, role } = newUser;
-  const userData = { username, email, password, role };
-
-  const [errors, setErrors] = useState({});
-
-  const validate = () => {
-    const newErrors = {};
-    if (!newUser.username) {
-      newErrors.username = "Username is required.";
-    }
-    if (!newUser.email) {
-      newErrors.email = "Email is required.";
-    }
-    if (!newUser.password) {
-      newErrors.password = "Password is required.";
-    }
-    if (!newUser.confirmPassword) {
-      newErrors.confirmPassword = "Confirm Password is required.";
-    }
-    if (!newUser.gender) {
-      newErrors.gender = "Gender is required.";
-    }
-
-    const checkUser = users.find(({ email }) => email === newUser.email);
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (checkUser) {
-      newErrors.email = "Email is already exist";
-    }
-    if (newUser.email && !emailRegex.test(newUser.email)) {
-      newErrors.email = "Invalid email format.";
-    }
-
-    if (newUser.password && newUser.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters long.";
-    }
-    if (
-      newUser.password &&
-      newUser.confirmPassword &&
-      newUser.password !== newUser.confirmPassword
-    ) {
-      newErrors.confirmPassword = "Passwords do not match.";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
       postUser(userData);
+      navigate("/Login");
     }
   };
   return (
-    <div>
+    <div className="bg-[#eeeeee] dark:bg-[#0F172A] ">
       <Card
         color="transparent"
         shadow={false}
-        className="flex items-center mt-10"
+        className="flex items-center text-black dark:text-white "
       >
-        <Typography variant="h4" color="blue-gray">
-          SignUp
-        </Typography>
+        <Typography variant="h4">SignUp</Typography>
         <form
           className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
           onSubmit={handleSubmit}

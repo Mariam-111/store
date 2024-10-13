@@ -3,6 +3,9 @@ import axios from "axios";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import UserLayout from "./layouts/UserLayout";
 import AdminLayout from "./layouts/AdminLayout";
+import AllUsers from "./pages/AllUsers";
+import Swal from "sweetalert2";
+import ShowUser from "./pages/showUser";
 
 const App = () => {
   const navigate = useNavigate();
@@ -14,6 +17,18 @@ const App = () => {
   const [loggedFlag, setLoggedFlag] = useState(false);
   const [currentName, setName] = useState("");
   const [currentUser, setCurrentUser] = useState({});
+  const [newUser, setnewUser] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    gender: "",
+    role: "user",
+  });
+  const { username, email, password, role, gender } = newUser;
+  const userData = { username, email, password, role, gender };
+  const [errors, setErrors] = useState({});
+  const [showForm, setShowForm] = useState(false);
 
   const addedLocalCart = () => {
     if (cartItems.length != 0) {
@@ -88,10 +103,142 @@ const App = () => {
       data: d,
     }).then((res) => {
       getUsers();
-      navigate("/Login");
     });
   };
 
+  const validate = () => {
+    const newErrors = {};
+    if (!newUser.username) {
+      newErrors.username = "Username is required.";
+    }
+    if (!newUser.email) {
+      newErrors.email = "Email is required.";
+    }
+    if (!newUser.password) {
+      newErrors.password = "Password is required.";
+    }
+    if (!newUser.confirmPassword) {
+      newErrors.confirmPassword = "Confirm Password is required.";
+    }
+    if (!newUser.gender) {
+      newErrors.gender = "Gender is required.";
+    }
+
+    const checkUser = users.find(({ email }) => email === newUser.email);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (checkUser) {
+      newErrors.email = "Email is already exist";
+    }
+    if (newUser.email && !emailRegex.test(newUser.email)) {
+      newErrors.email = "Invalid email format.";
+    }
+
+    if (newUser.password && newUser.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters long.";
+    }
+    if (
+      newUser.password &&
+      newUser.confirmPassword &&
+      newUser.password !== newUser.confirmPassword
+    ) {
+      newErrors.confirmPassword = "Passwords do not match.";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const patchRole = (newRole, id) => {
+    let newUsers = users.map((u) => {
+      if (u.id == id) {
+        u.role = newRole;
+      }
+      return u;
+    });
+    setUsers(newUsers);
+    axios({
+      method: "patch",
+      url: `${import.meta.env.VITE_API}/users/${id}`,
+      data: {
+        role: newRole,
+      },
+    });
+  };
+  const makeAdmin = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Changing the role will affect the user permissions!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#00d084",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, make it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        patchRole("admin", id);
+        Swal.fire({
+          title: "Done!",
+          text: "The role has been updated.",
+          icon: "success",
+        });
+      }
+    });
+  };
+  const makeUser = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Changing the role will affect the user permissions!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#00d084",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, make it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        patchRole("user", id);
+        Swal.fire({
+          title: "Done!",
+          text: "The role has been updated.",
+          icon: "success",
+        });
+      }
+    });
+  };
+
+  const deleteUser = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios({
+          method: "DELETE",
+          url: `${import.meta.env.VITE_API}/users/${id}`,
+        }).then(() => getUsers());
+        Swal.fire({
+          title: "Deleted!",
+          text: "This user has been deleted.",
+          icon: "success",
+        });
+      }
+    });
+  };
+
+  const addUser = () => {
+    setShowForm(true);
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Your work has been saved",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
   useEffect(() => {
     getAllProducts();
     getUsers();
@@ -138,13 +285,44 @@ const App = () => {
               currentName={currentName}
               role={currentUser.role}
               postUser={postUser}
+              newUser={newUser}
+              setnewUser={setnewUser}
+              userData={userData}
+              errors={errors}
+              setErrors={setErrors}
+              validate={validate}
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
             />
           }
         />
         <Route
           path="/admin/*"
-          element={currentUser.role === "admin" && <AdminLayout />}
+          element={<AdminLayout />}
+          // element={currentUser.role === "admin" ? <AdminLayout /> : <Navigate to="/"/>}
         />
+        <Route
+          path="/admin/AllUsers"
+          element={
+            <AllUsers
+              users={users}
+              makeAdmin={makeAdmin}
+              makeUser={makeUser}
+              deleteUser={deleteUser}
+              addUser={addUser}
+              showForm={showForm}
+              setShowForm={setShowForm}
+              postUser={postUser}
+              newUser={newUser}
+              setnewUser={setnewUser}
+              userData={userData}
+              errors={errors}
+              setErrors={setErrors}
+              validate={validate}
+            />
+          }
+        />
+        <Route path="/admin/AllUsers/ShowUser" element={<ShowUser />} />
       </Routes>
     </div>
   );

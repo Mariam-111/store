@@ -23,6 +23,14 @@ const UserLayout = ({
   currentName,
   role,
   postUser,
+  currentUser, // Receiving currentUser
+  setCurrentUser,
+  newUser,
+  setnewUser,
+  userData,
+  errors,
+  setErrors,
+  validate,
 }) => {
   return (
     <div>
@@ -65,9 +73,28 @@ const UserLayout = ({
         />
         <Route
           path="/Signup"
-          element={<Signup users={users} postUser={postUser} />}
+          element={
+            <Signup
+              users={users}
+              postUser={postUser}
+              newUser={newUser}
+              setnewUser={setnewUser}
+              userData={userData}
+              errors={errors}
+              setErrors={setErrors}
+              validate={validate}
+            />
+          }
         />
-        <Route path="/UserInfo" element={<UserInfo />} />
+        <Route
+          path="/userinfo"
+          element={
+            <UserInfo
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
+            />
+          }
+        />
       </Routes>
       <MainFooter />
     </div>
