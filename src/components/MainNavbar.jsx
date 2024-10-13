@@ -114,13 +114,12 @@ const MainNavbar = ({
             <li>
               <Link
                 to="/UserInfo"
-                onClick={() => navigate("/UserInfo")}
                 className="justify-between"
               >{`Welcome ${currentName}`}</Link>
             </li>
             <li>
               <Link
-                to="/admin/Dashboard"
+                to="/admin"
                 className={`${
                   role === "admin" ? "block justify-between" : "hidden"
                 }`}
