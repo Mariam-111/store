@@ -44,20 +44,20 @@ const Login = ({ users, setLoggedFlag }) => {
   };
 
   return (
-    <div>
+    <div className="bg-[#eeeeee] dark:bg-[#0F172A] p-10">
       <Card
         color="transparent"
         shadow={false}
-        className="flex items-center mt-10"
+        className="flex items-center pt-10"
       >
-        <Typography variant="h4" color="blue-gray">
+        <Typography variant="h4" color="blue-gray"  >
           Login
         </Typography>
         <form
           className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
           onSubmit={checkLogin}
         >
-          <div className="mb-1 flex flex-col gap-6">
+          <div className="mb-1 flex flex-col gap-6 ">
             <Input
               label="Email"
               onChange={(e) =>
