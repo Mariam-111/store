@@ -291,6 +291,8 @@ const App = () => {
               errors={errors}
               setErrors={setErrors}
               validate={validate}
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
             />
           }
         />

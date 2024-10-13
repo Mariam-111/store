@@ -1,34 +1,25 @@
 import React, { useState } from "react";
 
-const UserInfo = () => {
- 
+const UserInfo = ({ currentUser, setCurrentUser }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [user, setUser] = useState({
-    name: "",
-    email: "",
-    gender: "",
-    password: "",
-  });
 
- 
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
   };
 
-  
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUser((prevUser) => ({
+    console.log(name, value);
+
+    setCurrentUser((prevUser) => ({
       ...prevUser,
       [name]: value,
     }));
   };
 
-  
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsEditing(false);
-    
   };
 
   return (
@@ -37,7 +28,7 @@ const UserInfo = () => {
         <div className="flex justify-center mb-4">
           <img
             src={
-              user.gender === "male"
+              currentUser.gender === "male"
                 ? "https://icons.veryicon.com/png/o/internet--web/web-interface-flat/6606-male-user.png"
                 : "https://icons.veryicon.com/png/o/emoticon/professional-portrait-shameless-10/female-post.png"
             }
@@ -47,27 +38,28 @@ const UserInfo = () => {
         </div>
 
         <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold text-green-600">{user.name}</h1>
-          <p>Username: {user.name}</p>
+          <h1 className="text-2xl font-bold text-green-600">
+            {currentUser.username}
+          </h1>
+          <p>Username: {currentUser.username}</p>
           <p>
-            My name is {user.name}, I'm a {user.gender} and I'm a member here.
+            My name is {currentUser.username}, I'm a {currentUser.gender} and
+            I'm a member here.
           </p>
         </div>
-
 
         <form
           className="space-y-6 text-black dark:text-white"
           onSubmit={handleSubmit}
         >
-
           <div>
             <label className="block font-bold mb-2">Your User Name</label>
             <input
               type="text"
               name="name"
-              value={user.name}
-              onChange={handleChange}
+              value={currentUser?.username || ""}
               disabled={!isEditing}
+              onChange={(e) => handleChange(e)}
               className="w-full p-3 border text-black border-gray-300 rounded-lg bg-gray-100"
             />
             <p className="text-xs mt-1">
@@ -81,8 +73,8 @@ const UserInfo = () => {
             <input
               type="email"
               name="email"
-              value={user.email}
-              onChange={handleChange}
+              value={currentUser?.email || ""}
+              onChange={(e) => handleChange(e)}
               disabled={!isEditing}
               className="w-full p-3 border rounded-lg bg-gray-100 text-black"
             />
@@ -97,14 +89,14 @@ const UserInfo = () => {
             <input
               type="text"
               name="gender"
-              value={user.gender}
-              onChange={handleChange}
+              value={currentUser?.gender || ""}
+              onChange={(e) => handleChange(e)}
               disabled={!isEditing}
               className="w-full p-3 border rounded-lg bg-gray-100 text-black"
             />
             <p className="text-xs mt-1">
               Please be noted that we do not support homosexuality,{" "}
-              <strong class="text-xl font-bold text-red-500">
+              <strong className="text-xl font-bold text-red-500">
                 straight out bitch
               </strong>
               .
@@ -116,8 +108,8 @@ const UserInfo = () => {
             <input
               type="password"
               name="password"
-              value={user.password}
-              onChange={handleChange}
+              value={currentUser?.password || ""}
+              onChange={(e) => handleChange(e)}
               disabled={!isEditing}
               className="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 text-black"
             />
@@ -127,7 +119,6 @@ const UserInfo = () => {
             </p>
           </div>
 
-         
           <div className="flex justify-center space-x-4">
             <button
               type="button"
