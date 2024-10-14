@@ -3,10 +3,6 @@ import axios from "axios";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import UserLayout from "./layouts/UserLayout";
 import AdminLayout from "./layouts/AdminLayout";
-import UsersDashboard from "./pages/UsersDashboard";
-import AddUser from "./pages/AddUser";
-import ShowUser from "./pages/ShowUser";
-import EditUser from "./pages/EditUser";
 
 const App = () => {
   const navigate = useNavigate();
@@ -212,18 +208,27 @@ const App = () => {
           path="/admin/*"
           element={
             currentUser?.role === "admin" ? (
-              <AdminLayout />
+              <AdminLayout
+                users={users}
+                getUsers={getUsers}
+                postUser={postUser}
+                newUser={newUser}
+                setnewUser={setnewUser}
+                userData={userData}
+                errors={errors}
+                validate={validate}
+              />
             ) : (
               <Navigate to="/" />
             )
           }
         />
 
-        <Route
+        {/* <Route
           path="/admin/UsersDashboard"
           element={<UsersDashboard users={users} getUsers={getUsers} />}
-        />
-        <Route
+        /> */}
+        {/* <Route
           path="/admin/*"
           element={
             <AdminLayout
@@ -236,12 +241,12 @@ const App = () => {
               validate={validate}
             />
           }
-        />
-        <Route
+        /> */}
+        {/* <Route
           path="/admin/UsersDashboard/ShowUser/:userID"
           element={<ShowUser />}
-        />
-        <Route
+        /> */}
+        {/* <Route
           path="/admin/UsersDashboard/EditUser/:userID"
           element={<EditUser getUsers={getUsers} users={users} />}
         />
@@ -257,7 +262,7 @@ const App = () => {
               validate={validate}
             />
           }
-        />
+        /> */}
       </Routes>
     </div>
   );

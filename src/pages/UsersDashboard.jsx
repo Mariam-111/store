@@ -1,16 +1,7 @@
 import React, { useState } from "react";
 import User from "../components/User";
-import MainNavbar from "../components/MainNavbar";
-import {
-  Button,
-  Card,
-  Typography,
-  Input,
-  Select,
-  Option,
-} from "@material-tailwind/react";
+import { Button, Card } from "@material-tailwind/react";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
-import ShowUser from "./ShowUser";
 import Swal from "sweetalert2";
 import axios from "axios";
 
@@ -75,8 +66,7 @@ const UsersDashboard = ({ users, getUsers }) => {
   };
 
   return (
-    <div>
-      <MainNavbar />
+    <div className="my-5">
       <div>
         <div className="text-center ">
           <h1 className="font-bold leading-snug tracking-tight text-slate-800 mx-auto my-6 w-full text-center text-2xl lg:max-w-3xl lg:text-5xl">
@@ -93,26 +83,26 @@ const UsersDashboard = ({ users, getUsers }) => {
           </Link>
         </div>
         <div>
-        <Card className=" w-5/6 mx-auto m-20">
-          <table className="table table-auto w-full min-w-max border-[1px] border-[#b3b3b3] shadow-lg shadow-[#b3b3b3]">
-            <thead className="font-bold text-base text-blue-gray-700 border-b-2 border-[#b3b3b3] bg-[#b3b3b3]">
-              <tr>
-                <th className="w-1/6 p-4">Name</th>
-                <th className="w-1/6">Role</th>
-                <th className="w-4/6  text-center">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((member, id) => (
-                <User
-                  key={id}
-                  member={member}
-                  makeAdmin={makeAdmin}
-                  deleteUser={deleteUser}
-                />
-              ))}
-            </tbody>
-          </table>
+          <Card className=" w-5/6 mx-auto m-20">
+            <table className="table table-auto w-full min-w-max border-[1px] border-[#b3b3b3] shadow-lg shadow-[#b3b3b3]">
+              <thead className="font-bold text-base text-blue-gray-700 border-b-2 border-[#b3b3b3] bg-[#b3b3b3]">
+                <tr>
+                  <th className="w-1/6 p-4">Name</th>
+                  <th className="w-1/6">Role</th>
+                  <th className="w-4/6  text-center">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {users.map((member, id) => (
+                  <User
+                    key={id}
+                    member={member}
+                    makeAdmin={makeAdmin}
+                    deleteUser={deleteUser}
+                  />
+                ))}
+              </tbody>
+            </table>
           </Card>
         </div>
       </div>

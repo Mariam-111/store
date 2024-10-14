@@ -20,10 +20,9 @@ const MainNavbar = ({
   gender,
   cartNum,
   setCartItems,
-  
 }) => {
   const navigate = useNavigate();
-  
+
   const [mode, setMode] = useState(() => {
     return localStorage.theme === "dark" ? "dark" : "light";
   });
@@ -48,10 +47,9 @@ const MainNavbar = ({
       document.documentElement.classList.remove("dark");
     }
   }, [mode]);
-  
 
   return (
-    <div className="flex flex-wrap items-center justify-between bg-[#eeeeee] dark:bg-[#0F172A] p-4">
+    <div className="flex flex-wrap items-center justify-between bg-white dark:bg-[#0F172A] p-4">
       <div>
         <img
           src={mode === "dark" ? footerLogo : logo}
@@ -108,7 +106,6 @@ const MainNavbar = ({
                     ? "https://docs.material-tailwind.com/img/team-3.jpg"
                     : "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
                 }`}
-
               />
             </div>
           </div>

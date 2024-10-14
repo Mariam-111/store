@@ -1,34 +1,28 @@
 import React from "react";
 import UsersDashboard from "../pages/UsersDashboard";
 import { Route, Routes, useNavigate } from "react-router-dom";
-
-import AllUsers from "../pages/AllUsers";
 import Dashboard from "../pages/Dashboard";
 import NavbarDark from "../components/NavbarDark";
 import EditProduct from "../pages/EditProduct";
 import AddProduct from "../pages/AddProduct";
 import Productsinfo from "../pages/Productsinfo";
 import ShowUser from "../pages/ShowUser";
+import EditUser from "../pages/EditUser";
+import AddUser from "../pages/AddUser";
 
 const AdminLayout = ({
   users,
-  makeAdmin,
-  makeUser,
-  deleteUser,
-  addUser,
-  showForm,
-  setShowForm,
+  getUsers,
   postUser,
   newUser,
   setnewUser,
   userData,
   errors,
-  setErrors,
   validate,
 }) => {
   return (
     <div>
-{/* <<<<<<< HEAD
+      {/* <<<<<<< HEAD
       admin layout
       <br />
       <Link to="UsersDashboard" className="bg-blue-800">
@@ -45,32 +39,32 @@ const AdminLayout = ({
       {/* <Dashboard /> */}
       <Routes>
         <Route path="/dashboard" element={<Dashboard />} />
-        {/* <Route
-          path="/AllUsers"
+        <Route
+          path="/UsersDashboard"
+          element={<UsersDashboard users={users} getUsers={getUsers} />}
+        />
+        <Route
+          path="/UsersDashboard/EditUser/:userID"
+          element={<EditUser getUsers={getUsers} users={users} />}
+        />
+        <Route
+          path="/UsersDashboard/AddUser"
           element={
-            <AllUsers
-              users={users}
-              makeAdmin={makeAdmin}
-              makeUser={makeUser}
-              deleteUser={deleteUser}
-              addUser={addUser}
-              showForm={showForm}
-              setShowForm={setShowForm}
+            <AddUser
               postUser={postUser}
               newUser={newUser}
               setnewUser={setnewUser}
               userData={userData}
               errors={errors}
-              setErrors={setErrors}
               validate={validate}
             />
           }
         />
-        <Route path="/AllUsers/ShowUser" element={<ShowUser />} /> */}
+        <Route path="/UsersDashboard/ShowUser/:userID" element={<ShowUser />} />
         <Route path="/Productsinfo" element={<Productsinfo />} />
         <Route path="/Productsinfo/addProduct" element={<AddProduct />} />
         <Route
-          path="/admin/Productsinfo/editProduct"
+          path="/admin/Productsinfo/editProduct/:productID"
           element={<EditProduct />}
         />
       </Routes>

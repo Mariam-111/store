@@ -28,7 +28,7 @@ const Productinfo = () => {
   const displayColumns = ["id", "title", "image", "price", "category", "count"];
 
   return (
-    <div className=" mx-auto px-4 bg-[#eeeeee] dark:bg-[#0F172A] text-black dark:text-white">
+    <div className=" mx-auto px-4 bg-white dark:bg-[#0F172A] text-black dark:text-white my-5">
       <h1 className="text-center font-extrabold text-3xl text-blue-600">
         Products
       </h1>
@@ -104,7 +104,7 @@ const Productinfo = () => {
                   <td className={rowClass}>
                     <div className="flex gap-2">
                       {/* Link to the edit page with the product ID */}
-                      <Link to={`/admin/Productsinfo/editProduct`}>
+                      <Link to={`/admin/Productsinfo/editProduct/${record.id}`}>
                         <Button
                           color="green"
                           size="sm"

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import MainNavbar from "../components/MainNavbar";
 import {
   Card,
   CardHeader,
@@ -36,8 +35,7 @@ const ShowUser = () => {
   });
 
   return (
-    <div>
-      <MainNavbar />
+    <div className="py-5">
       <Link to="/admin/UsersDashboard/ShowUser/:"></Link>
       <Card className="w-96 mx-auto">
         <CardHeader floated={false} className="h-80">
