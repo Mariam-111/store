@@ -56,7 +56,7 @@ const UserInfo = ({ currentUser, setCurrentUser }) => {
             <label className="block font-bold mb-2">Your User Name</label>
             <input
               type="text"
-              name="name"
+              name="username"
               value={currentUser?.username || ""}
               disabled={!isEditing}
               onChange={(e) => handleChange(e)}
@@ -123,7 +123,7 @@ const UserInfo = ({ currentUser, setCurrentUser }) => {
             <button
               type="button"
               onClick={handleEditToggle}
-              className="px-6 py-2 bg-gray-800 text-white font-semibold rounded-lg"
+              className="px-6 py-2 bg-[#014026] text-white font-semibold rounded-lg"
             >
               {isEditing ? "Cancel" : "Edit"}
             </button>

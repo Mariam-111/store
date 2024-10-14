@@ -4,9 +4,9 @@ import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import UserLayout from "./layouts/UserLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import UsersDashboard from "./pages/UsersDashboard";
-import ShowUser from "./pages/showUser";
-import EditUser from "./pages/EditUser";
 import AddUser from "./pages/AddUser";
+import ShowUser from "./pages/ShowUser";
+import EditUser from "./pages/EditUser";
 
 const App = () => {
   const navigate = useNavigate();
@@ -218,15 +218,16 @@ const App = () => {
             )
           }
         />
+
         <Route
           path="/admin/UsersDashboard"
           element={<UsersDashboard users={users} getUsers={getUsers} />}
         />
         <Route
-          path="/admin/UsersDashboard/AddUser"
+          path="/admin/*"
           element={
-            <AddUser
-              getUsers={getUsers}
+            <AdminLayout
+              users={users}
               postUser={postUser}
               newUser={newUser}
               setnewUser={setnewUser}
@@ -243,6 +244,19 @@ const App = () => {
         <Route
           path="/admin/UsersDashboard/EditUser/:userID"
           element={<EditUser getUsers={getUsers} users={users} />}
+        />
+        <Route
+          path="/admin/UsersDashboard/AddUser"
+          element={
+            <AddUser
+              postUser={postUser}
+              newUser={newUser}
+              setnewUser={setnewUser}
+              userData={userData}
+              errors={errors}
+              validate={validate}
+            />
+          }
         />
       </Routes>
     </div>

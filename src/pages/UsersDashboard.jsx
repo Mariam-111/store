@@ -10,7 +10,7 @@ import {
   Option,
 } from "@material-tailwind/react";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
-import ShowUser from "./showUser";
+import ShowUser from "./ShowUser";
 import Swal from "sweetalert2";
 import axios from "axios";
 
