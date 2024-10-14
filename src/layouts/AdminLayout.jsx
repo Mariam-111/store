@@ -1,18 +1,25 @@
 import React from "react";
-import { Link, Route, Routes, useNavigate } from "react-router-dom";
-import AllUsers from "../pages/AllUsers";
+import { Link, Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import UsersDashboard from "../pages/UsersDashboard";
 import { Button } from "@material-tailwind/react";
+import EditUser from "../pages/EditUser";
+import AddUser from "../pages/AddUser";
+import Dashboard from "../pages/Dashboard";
 
 const AdminLayout = () => {
   return (
     <div>
       admin layout
       <br />
-      <Link to="AllUsers" className="bg-blue-800">
-        View users
+      <Link to="UsersDashboard" className="bg-blue-800">
+        Users Dashboard
       </Link>
-      {/* <Routes>
-        <Route path="AllUsers" element={<AllUsers />} />
+      <br />
+      {/* <Link to="AddUser" className="bg-blue-800">
+        add Users 
+      </Link>
+      <Routes>
+      <Route path="/AddUser" element={<AddUser/>} />
       </Routes> */}
     </div>
   );

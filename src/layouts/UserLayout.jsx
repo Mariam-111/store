@@ -22,6 +22,7 @@ const UserLayout = ({
   setLoggedFlag,
   currentName,
   role,
+  gender,
   postUser,
   newUser,
   setnewUser,
@@ -37,6 +38,7 @@ const UserLayout = ({
         setLoggedFlag={setLoggedFlag}
         currentName={currentName}
         role={role}
+        gender={gender}
         cartNum={cartNum}
         setCartItems={setCartItems}
       />

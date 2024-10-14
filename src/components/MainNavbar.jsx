@@ -16,6 +16,7 @@ const MainNavbar = ({
   setLoggedFlag,
   currentName,
   role,
+  gender,
   cartNum,
   setCartItems,
 }) => {
@@ -92,7 +93,11 @@ const MainNavbar = ({
             <div className="w-10 rounded-full">
               <img
                 alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                src={`${
+                  gender === "Female"
+                    ? "https://docs.material-tailwind.com/img/team-3.jpg"
+                    : "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+                }`}
               />
             </div>
           </div>

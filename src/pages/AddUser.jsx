@@ -1,15 +1,16 @@
-import React, { useState } from "react";
 import {
+  Button,
   Card,
   Input,
-  Button,
-  Typography,
   Select,
   Option,
+  Typography,
 } from "@material-tailwind/react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
-const Signup = ({
+const AddUser = ({
   postUser,
   newUser,
   setnewUser,
@@ -22,7 +23,6 @@ const Signup = ({
     e.preventDefault();
     if (validate()) {
       postUser(userData);
-      navigate("/Login");
     }
   };
   return (
@@ -33,7 +33,7 @@ const Signup = ({
         className="flex items-center mt-10"
       >
         <Typography variant="h4" color="blue-gray">
-          SignUp
+          Add New User
         </Typography>
         <form
           className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
@@ -101,25 +101,33 @@ const Signup = ({
             </Select>
             {errors.gender && <p className="text-red-500">{errors.gender}</p>}
           </div>
-          <Button type="submit" className="mt-6 bg-[#014026]" fullWidth>
-            SignUp
+          <Button
+            type="submit"
+            className="mt-6 bg-[#014026]"
+            fullWidth
+            onClick={() => {
+              validate() &&
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "User Added Successfully",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+            }}
+          >
+            Add
           </Button>
-          <Typography color="gray" className="mt-4 text-center font-normal">
-            Already have an account?{" "}
-            <Link
-              to="/Login"
-              className="font-bold text-red-500"
-              onClick={() => {
-                navigate("/Login");
-              }}
-            >
-              Login
-            </Link>
-          </Typography>
         </form>
+        <Button
+          color="yellow"
+          onClick={() => navigate("/admin/UsersDashboard")}
+        >
+          Back
+        </Button>
       </Card>
     </div>
   );
 };
 
-export default Signup;
+export default AddUser;

@@ -9,14 +9,6 @@
       "id": 1
     },
     {
-      "username": "jasmine",
-      "email": "jas@gmail.com",
-      "password": "123456",
-      "role": "user",
-      "gender": "Female",
-      "id": 2
-    },
-    {
       "username": "taylor",
       "email": "taylor@gmail.com",
       "password": "taylor147",
@@ -51,7 +43,7 @@
     {
       "username": "hania",
       "email": "hania@gmail.com",
-      "password": "123456",
+      "password": "hania23",
       "role": "user",
       "gender": "Female",
       "id": 7
@@ -79,6 +71,30 @@
       "role": "user",
       "gender": "Male",
       "id": 11
+    },
+    {
+      "username": "maleek",
+      "email": "maleek@gmail.com",
+      "password": "123456",
+      "role": "user",
+      "gender": "Male",
+      "id": 12
+    },
+    {
+      "username": "youssef",
+      "email": "jossef@gmail.com",
+      "password": "123456",
+      "role": "user",
+      "gender": "Male",
+      "id": 13
+    },
+    {
+      "username": "lelyan",
+      "email": "lelo@gmail.com",
+      "password": "123456",
+      "role": "user",
+      "gender": "Female",
+      "id": 14
     }
   ],
   "products": [
