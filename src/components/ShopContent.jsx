@@ -4,7 +4,7 @@ import { Button } from "@material-tailwind/react";
 
 const ShopContent = ({ allProducts, addToCart }) => {
   return (
-    <div className="p-10 bg-[#eeeeee] dark:bg-[#0F172A]">
+    <div className="p-10 bg-white dark:bg-[#0F172A]">
       <div className="text-[#1565C0] font-bold m-10 text-center underline underline-offset-4 leading-9 text-[1.875rem] p-10 ">
         P R O D U C T S
       </div>

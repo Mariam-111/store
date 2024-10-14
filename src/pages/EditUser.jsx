@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import MainNavbar from "../components/MainNavbar";
 import {
   Button,
   Card,
@@ -90,8 +89,7 @@ const EditUser = ({ getUsers, users }) => {
   }, [userID]);
 
   return (
-    <div>
-      <MainNavbar />
+    <div className="py-4">
       <div className="flex justify-center">
         <Card color="transparent" className="p-10">
           <Typography variant="h4" color="blue-gray">
