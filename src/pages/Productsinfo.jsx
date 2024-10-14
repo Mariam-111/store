@@ -2,16 +2,19 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Card, Typography, Button } from "@material-tailwind/react";
+import { toast } from "react-toastify";
+
 
 const Productinfo = () => {
   const [records, setRecords] = useState([]);
 
   useEffect(() => {
+
     axios.get('http://localhost:3030/products')
       .then(res => {
-        setRecords(res.data);
+        setRecords(res.data); 
       })
-      .catch(err => console.error(err));
+      .catch(err => console.error(err)); 
   }, []);
 
   const handleDelete = (id) => {
@@ -19,21 +22,24 @@ const Productinfo = () => {
       .then(() => {
         setRecords(records.filter(record => record.id !== id));
       })
-      .catch(err => console.error(err));
+      .catch(err => console.error(err)); // Handle errors
   };
 
+  // Define which columns to display in the product table
   const displayColumns = ['id', 'title', 'image', 'price', 'category', 'count'];
 
   return (
     <div className='container mx-auto px-4'>
       <h1 className='text-center font-extrabold text-3xl mt-6 text-blue-600'>Products</h1>
       
+      {/* Button to add a new product */}
       <div className='mt-5 flex justify-end'>
         <Link to="/create">
           <Button color="blue" size="md" className="rounded-full shadow-lg">Add Product</Button>
         </Link>
       </div>
 
+      {/* Table of products */}
       <Card className="mt-6 overflow-auto">
         <table className="w-full table-auto text-left border-separate border-spacing-0">
           <thead className='bg-blue-gray-100'>
@@ -74,6 +80,7 @@ const Productinfo = () => {
                         color="blue-gray"
                         className="font-normal text-sm"
                       >
+                        {/* Render image for the 'image' column, rating count for 'count', and others directly */}
                         {col === 'image' ? (
                           <img src={record[col]} alt={record.title} className="w-24 rounded-md" />
                         ) : col === 'count' ? (
@@ -86,7 +93,8 @@ const Productinfo = () => {
                   ))}
                   <td className={rowClass}>
                     <div className="flex gap-2">
-                      <Link to={`/edit/${record.id}`}>
+                      {/* Link to the edit page with the product ID */}
+                      <Link to={`/edit-product/${record.id}`}>
                         <Button color="green" size="sm" className="rounded-full shadow-md">Edit</Button>
                       </Link>
                       <Button 
