@@ -3,7 +3,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import AllUsers from "../pages/AllUsers";
 import Dashboard from "../pages/Dashboard";
 import NavbarDark from "../components/NavbarDark";
-import ShowUser from "../pages/showUser";
+import ShowUser from "../pages/ShowUser";
 import EditProduct from "../pages/EditProduct";
 import AddProduct from "../pages/AddProduct";
 import Productsinfo from "../pages/Productsinfo";
