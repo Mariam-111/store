@@ -78,7 +78,7 @@ const EditProduct = () => {
   };
 
   return (
-    <div className="container mx-auto mt-10">
+    <div className="container mx-auto mt-10 ">
       <h2 className="text-center text-2xl font-bold mb-5">Edit Product</h2>
       <form onSubmit={handleSubmit} className="max-w-lg mx-auto space-y-4">
         <Input

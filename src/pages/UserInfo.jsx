@@ -23,7 +23,7 @@ const UserInfo = ({ currentUser, setCurrentUser }) => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 bg-[#eeeeee] dark:bg-[#0F172A] text-black dark:text-white">
+    <div className="flex justify-center items-center min-h-screen  bg-[#eeeeee] dark:bg-[#0F172A] text-black dark:text-white">
       <div className="max-w-4xl w-full bg-white shadow-lg rounded-lg p-8 dark:bg-gray-700">
         <div className="flex justify-center mb-4">
           <img
