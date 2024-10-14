@@ -78,7 +78,7 @@ const UsersDashboard = ({ users, getUsers }) => {
     <div>
       <MainNavbar />
       <div>
-        <div className="text-center mb-8">
+        <div className="text-center ">
           <h1 className="font-bold leading-snug tracking-tight text-slate-800 mx-auto my-6 w-full text-center text-2xl lg:max-w-3xl lg:text-5xl">
             Users
           </h1>
@@ -93,12 +93,13 @@ const UsersDashboard = ({ users, getUsers }) => {
           </Link>
         </div>
         <div>
-          <table className="table table-auto text-center w-full min-w-max">
-            <thead className="bg-[#607d8b] text-white font-bold text-base">
+        <Card className=" w-5/6 mx-auto m-20">
+          <table className="table table-auto w-full min-w-max border-[1px] border-[#b3b3b3] shadow-lg shadow-[#b3b3b3]">
+            <thead className="font-bold text-base text-blue-gray-700 border-b-2 border-[#b3b3b3] bg-[#b3b3b3]">
               <tr>
-                <th className="w-1/4">Name</th>
-                <th className="w-1/4">Role</th>
-                <th className="w-1/2  text-center">Actions</th>
+                <th className="w-1/6 p-4">Name</th>
+                <th className="w-1/6">Role</th>
+                <th className="w-4/6  text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -112,6 +113,7 @@ const UsersDashboard = ({ users, getUsers }) => {
               ))}
             </tbody>
           </table>
+          </Card>
         </div>
       </div>
     </div>

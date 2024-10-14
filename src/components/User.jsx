@@ -13,7 +13,7 @@ const User = ({
     setCureentUSerAdmin(role === "admin" && id == window.localStorage.gi);
   }, [id]);
   return (
-    <tr className="bg-blue-900 text-white">
+    <tr className="bg-blue-gray-50/50 text-blue-gray-700 border-b border-[#999999]">
       <td>{username}</td>
       <td>{role}</td>
       <td className="flex gap-8 justify-center">

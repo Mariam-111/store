@@ -39,7 +39,7 @@ const ShowUser = () => {
     <div>
       <MainNavbar />
       <Link to="/admin/UsersDashboard/ShowUser/:"></Link>
-      <Card className="w-96  mx-auto">
+      <Card className="w-96 mx-auto">
         <CardHeader floated={false} className="h-80">
           <img
             src={`${

@@ -17,14 +17,6 @@
       "id": 3
     },
     {
-      "username": "mohamed",
-      "email": "mo@gmail.com",
-      "password": "123456",
-      "role": "user",
-      "gender": "Male",
-      "id": 4
-    },
-    {
       "username": "james",
       "email": "james@gmail.com",
       "password": "123456",
