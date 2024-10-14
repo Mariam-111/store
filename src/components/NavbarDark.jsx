@@ -13,7 +13,7 @@ const NavbarDark = () => {
     <Navbar
       variant="gradient"
       color="blue-gray"
-      className="mx-auto max-w-screen-xl from-blue-gray-900 to-blue-gray-800 px-4 py-3"
+      className="mx-auto w-full from-blue-gray-900 to-blue-gray-800 px-4 py-3"
     >
       <div className="flex flex-wrap items-center justify-between gap-y-4 text-white">
         <div className="flex space-x-4">

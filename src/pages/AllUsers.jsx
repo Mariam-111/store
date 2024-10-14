@@ -34,7 +34,6 @@ const AllUsers = ({
   };
 
   return (
-    <div>
     <div className="bg-[#eeeeee] dark:bg-[#0F172A]">
       {showForm ? (
         <Card
