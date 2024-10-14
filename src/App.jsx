@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import UserLayout from "./layouts/UserLayout";
 import AdminLayout from "./layouts/AdminLayout";
-import Swal from "sweetalert2";
+import UsersDashboard from "./pages/UsersDashboard";
+import AddUser from "./pages/AddUser";
+import ShowUser from "./pages/ShowUser";
+import EditUser from "./pages/EditUser";
 
 const App = () => {
   const navigate = useNavigate();
@@ -24,10 +27,8 @@ const App = () => {
     role: "user",
   });
   const { username, email, password, role, gender } = newUser;
-  const userData = { username, email, password, role, gender };
+  const [userData, setUserData] = useState({});
   const [errors, setErrors] = useState({});
-  const [showForm, setShowForm] = useState(false);
-
   const addedLocalCart = () => {
     if (cartItems.length != 0) {
       localStorage.it = JSON.stringify(cartItems);
@@ -121,7 +122,6 @@ const App = () => {
     if (!newUser.gender) {
       newErrors.gender = "Gender is required.";
     }
-
     const checkUser = users.find(({ email }) => email === newUser.email);
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (checkUser) {
@@ -146,97 +146,6 @@ const App = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const patchRole = (newRole, id) => {
-    let newUsers = users.map((u) => {
-      if (u.id == id) {
-        u.role = newRole;
-      }
-      return u;
-    });
-    setUsers(newUsers);
-    axios({
-      method: "patch",
-      url: `${import.meta.env.VITE_API}/users/${id}`,
-      data: {
-        role: newRole,
-      },
-    });
-  };
-  const makeAdmin = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "Changing the role will affect the user permissions!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#00d084",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, make it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        patchRole("admin", id);
-        Swal.fire({
-          title: "Done!",
-          text: "The role has been updated.",
-          icon: "success",
-        });
-      }
-    });
-  };
-  const makeUser = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "Changing the role will affect the user permissions!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#00d084",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, make it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        patchRole("user", id);
-        Swal.fire({
-          title: "Done!",
-          text: "The role has been updated.",
-          icon: "success",
-        });
-      }
-    });
-  };
-
-  const deleteUser = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axios({
-          method: "DELETE",
-          url: `${import.meta.env.VITE_API}/users/${id}`,
-        }).then(() => getUsers());
-        Swal.fire({
-          title: "Deleted!",
-          text: "This user has been deleted.",
-          icon: "success",
-        });
-      }
-    });
-  };
-
-  const addUser = () => {
-    setShowForm(true);
-    Swal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Your work has been saved",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-  };
   useEffect(() => {
     getAllProducts();
     getUsers();
@@ -262,6 +171,10 @@ const App = () => {
     loggedFlag ? getCurrentUser() : localStorage.gi && setLoggedFlag(true);
   }, [loggedFlag]);
 
+  useEffect(() => {
+    setUserData({ username, email, password, role, gender });
+  }, [newUser]);
+
   return (
     <div>
       <Routes>
@@ -282,6 +195,7 @@ const App = () => {
               setLoggedFlag={setLoggedFlag}
               currentName={currentName}
               role={currentUser.role}
+              gender={currentUser.gender}
               postUser={postUser}
               newUser={newUser}
               setnewUser={setnewUser}
@@ -297,24 +211,52 @@ const App = () => {
         <Route
           path="/admin/*"
           element={
+            currentUser?.role === "admin" ? (
+              <AdminLayout />
+            ) : (
+              <Navigate to="/" />
+            )
+          }
+        />
+
+        <Route
+          path="/admin/UsersDashboard"
+          element={<UsersDashboard users={users} getUsers={getUsers} />}
+        />
+        <Route
+          path="/admin/*"
+          element={
             <AdminLayout
               users={users}
-              makeAdmin={makeAdmin}
-              makeUser={makeUser}
-              deleteUser={deleteUser}
-              addUser={addUser}
-              showForm={showForm}
-              setShowForm={setShowForm}
               postUser={postUser}
               newUser={newUser}
               setnewUser={setnewUser}
               userData={userData}
               errors={errors}
-              setErrors={setErrors}
               validate={validate}
             />
           }
-          // element={currentUser.role === "admin" ? <AdminLayout /> : <Navigate to="/"/>}
+        />
+        <Route
+          path="/admin/UsersDashboard/ShowUser/:userID"
+          element={<ShowUser />}
+        />
+        <Route
+          path="/admin/UsersDashboard/EditUser/:userID"
+          element={<EditUser getUsers={getUsers} users={users} />}
+        />
+        <Route
+          path="/admin/UsersDashboard/AddUser"
+          element={
+            <AddUser
+              postUser={postUser}
+              newUser={newUser}
+              setnewUser={setnewUser}
+              userData={userData}
+              errors={errors}
+              validate={validate}
+            />
+          }
         />
       </Routes>
     </div>

@@ -54,7 +54,7 @@ const NavbarDark = () => {
           </Typography>
           <Typography
             as={Link}
-            to="/admin/AllUsers"
+            to="/admin/UsersDashboard"
             variant="h6"
             className="cursor-pointer py-1.5"
           >
@@ -73,10 +73,12 @@ const NavbarDark = () => {
         {/* Search bar and Icons */}
         <div className="ml-auto flex gap-1 md:mr-4">
           <IconButton variant="text" color="white">
+
             <Cog6ToothIcon className="h-4 w-4 text-black dark:text-white" />
           </IconButton>
           <IconButton variant="text" color="white">
             <BellIcon className="h-4 w-4 text-black dark:text-white" />
+              
           </IconButton>
           {/* Dark Mode Toggle Button */}
           <Button

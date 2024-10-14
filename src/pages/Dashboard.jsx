@@ -15,8 +15,9 @@ const Dashboard = () => {
               Last user registered: <span className="font-bold">mario</span>
             </p>
             <button
+
               className="bg-gray-300 dark:dark:bg-gray-900 px-4 py-2 rounded-lg hover:bg-gray-600"
-              onClick={() => navigate("/admin/AllUsers")}
+              onClick={() => navigate("/admin/UserDashboard")}
             >
               CHECK USERS
             </button>
