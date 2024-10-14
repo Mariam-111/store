@@ -35,7 +35,7 @@ const AllUsers = ({
   };
 
   return (
-    <div>
+    <div className="bg-[#eeeeee] dark:bg-[#0F172A]">
       <MainNavbar />
       {showForm ? (
         <Card
