@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   Input,
@@ -8,8 +8,8 @@ import {
   CardBody,
   CardFooter,
   Typography,
-  Alert
-} from '@material-tailwind/react';
+  Alert,
+} from "@material-tailwind/react";
 
 const AddProduct = () => {
   const [product, setProduct] = useState({
@@ -18,7 +18,7 @@ const AddProduct = () => {
     description: "",
     category: "",
     image: "",
-    rating: { rate: 0, count: 0 } // Initialize rating with rate and count
+    rating: { rate: 0, count: 0 }, // Initialize rating with rate and count
   });
   const [error, setError] = useState(null); // State for tracking error messages
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ const AddProduct = () => {
     const { name, value } = e.target;
     setProduct((prev) => ({
       ...prev,
-      [name]: name === "price" ? Number(value) : value // Convert price to a number
+      [name]: name === "price" ? Number(value) : value, // Convert price to a number
     }));
   };
 
@@ -36,8 +36,8 @@ const AddProduct = () => {
     setError(null); // Reset error state on new submission
 
     try {
-      await axios.post('http://localhost:3030/products', product);
-      navigate('/products'); // Navigate back to the products page after adding a product
+      await axios.post(`${import.meta.env.VITE_API}/products`, product);
+      navigate("/products"); // Navigate back to the products page after adding a product
     } catch (err) {
       console.error("Error adding product:", err);
       setError("Failed to add product. Please check your input and try again."); // Set error message
@@ -51,9 +51,12 @@ const AddProduct = () => {
           <Typography variant="h5" className="mb-6 text-center">
             Add New Product
           </Typography>
-
-          {error && <Alert color="red" className="mb-4">{error}</Alert>} {/* Display error message */}
-
+          {error && (
+            <Alert color="red" className="mb-4">
+              {error}
+            </Alert>
+          )}{" "}
+          {/* Display error message */}
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <Input
@@ -111,23 +114,27 @@ const AddProduct = () => {
                 label="Rating Rate"
                 name="ratingRate"
                 value={product.rating.rate}
-                onChange={(e) => setProduct((prev) => ({
-                  ...prev,
-                  rating: { ...prev.rating, rate: Number(e.target.value) }
-                }))}
+                onChange={(e) =>
+                  setProduct((prev) => ({
+                    ...prev,
+                    rating: { ...prev.rating, rate: Number(e.target.value) },
+                  }))
+                }
                 required
               />
             </div>
             <div className="mb-4">
               <Input
-                label="Rating Count" 
-                type="number" 
-                name="rating.count" 
-                value={product.rating.count}               
-                onChange={(e) => setProduct((prev) => ({
-                  ...prev,
-                  rating: { ...prev.rating, count: Number(e.target.value) } // Update rating count
-                }))}
+                label="Rating Count"
+                type="number"
+                name="rating.count"
+                value={product.rating.count}
+                onChange={(e) =>
+                  setProduct((prev) => ({
+                    ...prev,
+                    rating: { ...prev.rating, count: Number(e.target.value) }, // Update rating count
+                  }))
+                }
                 required
               />
             </div>
