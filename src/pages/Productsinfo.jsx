@@ -28,8 +28,8 @@ const Productinfo = () => {
   const displayColumns = ["id", "title", "image", "price", "category", "count"];
 
   return (
-    <div className="container mx-auto px-4">
-      <h1 className="text-center font-extrabold text-3xl mt-6 text-blue-600">
+    <div className=" mx-auto px-4 bg-[#eeeeee] dark:bg-[#0F172A] text-black dark:text-white">
+      <h1 className="text-center font-extrabold text-3xl text-blue-600">
         Products
       </h1>
 
@@ -43,9 +43,9 @@ const Productinfo = () => {
       </div>
 
       {/* Table of products */}
-      <Card className="mt-6 overflow-auto">
+      <Card className="mt-6 overflow-auto dark:bg-blue-gray-400">
         <table className="w-full table-auto text-left border-separate border-spacing-0">
-          <thead className="bg-blue-gray-100">
+          <thead className="bg-blue-gray-300 dark:bg-blue-gray-100">
             <tr>
               {displayColumns.map((column, index) => (
                 <th key={index} className="p-4 text-blue-gray-600 border-b-2">
