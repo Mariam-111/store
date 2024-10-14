@@ -34,21 +34,21 @@ const AllUsers = ({
   };
 
   return (
-    <div className="bg-[#eeeeee] dark:bg-[#0F172A]">
+    <div className="bg-[#eeeeee] dark:bg-[#0F172A] text-black dark:text-white">
       {showForm ? (
         <Card
           color="transparent"
           shadow={false}
-          className="flex items-center mt-10"
+          className="flex items-center mt-10  "
         >
-          <Typography variant="h4" color="blue-gray">
+          <Typography variant="h4 " color="blue-gray">
             Add New User
           </Typography>
           <form
-            className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
+            className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96 "
             onSubmit={handleSubmit}
           >
-            <div className="mb-1 flex flex-col gap-6">
+            <div className="mb-1 flex flex-col gap-6 ">
               <Input
                 label="Username"
                 name="username"
@@ -118,11 +118,11 @@ const AllUsers = ({
       ) : (
         <div>
           <div className="text-center mb-8">
-            <h1 className="font-bold leading-snug tracking-tight text-slate-800 mx-auto my-6 w-full text-center text-2xl lg:max-w-3xl lg:text-5xl">
+            <h1 className="p-10 font-bold leading-snug tracking-tight text-slate-800 mx-auto w-full text-center text-2xl lg:max-w-3xl lg:text-5xl">
               Users
             </h1>
             <Button
-              className="rounded-md bg-green-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-green-700 focus:shadow-none active:bg-green-700 hover:bg-green-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
+              className="rounded-md bg-[#014026] py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-green-700 focus:shadow-none active:bg-green-700 hover:bg-green-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
               type="button"
               onClick={() => addUser()}
             >
@@ -130,7 +130,7 @@ const AllUsers = ({
             </Button>
           </div>
           <div>
-            <table className="table">
+            <table className="table dark:bg-gray-700 ">
               <thead>
                 <tr>
                   <th>Name</th>

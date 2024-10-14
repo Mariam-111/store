@@ -56,7 +56,7 @@ const CartContent = ({
   }, [cartItems]);
 
   return (
-    <div className="-5my min-h-screen bg-[#eeeeee] dark:bg-[#0F172A]">
+    <div className=" min-h-screen bg-white dark:bg-[#0F172A]">
       <div className="flex justify-center gap-4 mb-4">
         <span className="text-3xl text-red-500">
           <BsCart4 />
@@ -68,7 +68,7 @@ const CartContent = ({
 
       <div>
         {cartItems.length == 0 || !loggedFlag ? (
-          <div className="flex justify-evenly md:flex-row flex-col gap-5 ">
+          <div className="flex justify-evenly md:flex-row flex-col gap-5">
             <div className="flex flex-col justify-center items-center gap-2 ">
               <img src={cartImg} alt="" className="w-52 h-52" />
               <h1 className="text-black dark:text-white text-[2.25rem] font-bold ">
@@ -125,7 +125,7 @@ const CartContent = ({
                     key={indx}
                     className="flex justify-around flex-col items-center md:flex-row "
                   >
-                    <div className="flex flex-row bg-white gap-6 shadow-md p-6 justify-evenly mx-3 bg-[#eeeeee] dark:bg-gray-700 text-black  ">
+                    <div className="flex flex-row bg-white gap-6 shadow-md p-6 justify-evenly mx-3 dark:bg-gray-700 text-black  ">
                       <div>
                         <p className="text-[1rem] font-bold">Product</p>
                         <div className="flex gap-2 py-4">
