@@ -1,19 +1,64 @@
 import React from "react";
-import { Link, Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import AllUsers from "../pages/AllUsers";
-import { Button } from "@material-tailwind/react";
+import Dashboard from "../pages/Dashboard";
+import NavbarDark from "../components/NavbarDark";
+import ShowUser from "../pages/showUser";
+import EditProduct from "../pages/EditProduct";
+import AddProduct from "../pages/AddProduct";
+import Productsinfo from "../pages/Productsinfo";
 
-const AdminLayout = () => {
+const AdminLayout = ({
+  users,
+  makeAdmin,
+  makeUser,
+  deleteUser,
+  addUser,
+  showForm,
+  setShowForm,
+  postUser,
+  newUser,
+  setnewUser,
+  userData,
+  errors,
+  setErrors,
+  validate,
+}) => {
   return (
     <div>
-      admin layout
-      <br />
-      <Link to="AllUsers" className="bg-blue-800">
-        View users
-      </Link>
-      {/* <Routes>
-        <Route path="AllUsers" element={<AllUsers />} />
-      </Routes> */}
+      <NavbarDark />
+      {/* <Dashboard /> */}
+      <Routes>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route
+          path="/AllUsers"
+          element={
+            <AllUsers
+              users={users}
+              makeAdmin={makeAdmin}
+              makeUser={makeUser}
+              deleteUser={deleteUser}
+              addUser={addUser}
+              showForm={showForm}
+              setShowForm={setShowForm}
+              postUser={postUser}
+              newUser={newUser}
+              setnewUser={setnewUser}
+              userData={userData}
+              errors={errors}
+              setErrors={setErrors}
+              validate={validate}
+            />
+          }
+        />
+        <Route path="/AllUsers/ShowUser" element={<ShowUser />} />
+        <Route path="/Productsinfo" element={<Productsinfo />} />
+        <Route path="/Productsinfo/addProduct" element={<AddProduct />} />
+        <Route
+          path="/admin/Productsinfo/editProduct"
+          element={<EditProduct />}
+        />
+      </Routes>
     </div>
   );
 };

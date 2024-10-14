@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import User from "../components/User";
-import MainNavbar from "../components/MainNavbar";
 import {
   Button,
   Card,
@@ -35,8 +34,8 @@ const AllUsers = ({
   };
 
   return (
+    <div>
     <div className="bg-[#eeeeee] dark:bg-[#0F172A]">
-      <MainNavbar />
       {showForm ? (
         <Card
           color="transparent"

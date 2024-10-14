@@ -1,48 +1,51 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 import { Card, Typography, Button } from "@material-tailwind/react";
-import { toast } from "react-toastify";
-
 
 const Productinfo = () => {
   const [records, setRecords] = useState([]);
 
   useEffect(() => {
-
-    axios.get('http://localhost:3030/products')
-      .then(res => {
-        setRecords(res.data); 
+    axios
+      .get(`${import.meta.env.VITE_API}/products`)
+      .then((res) => {
+        setRecords(res.data);
       })
-      .catch(err => console.error(err)); 
+      .catch((err) => console.error(err));
   }, []);
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:3030/products/${id}`)
+    axios
+      .delete(`${import.meta.env.VITE_API}/products/${id}`)
       .then(() => {
-        setRecords(records.filter(record => record.id !== id));
+        setRecords(records.filter((record) => record.id !== id));
       })
-      .catch(err => console.error(err)); // Handle errors
+      .catch((err) => console.error(err)); // Handle errors
   };
 
   // Define which columns to display in the product table
-  const displayColumns = ['id', 'title', 'image', 'price', 'category', 'count'];
+  const displayColumns = ["id", "title", "image", "price", "category", "count"];
 
   return (
-    <div className='container mx-auto px-4'>
-      <h1 className='text-center font-extrabold text-3xl mt-6 text-blue-600'>Products</h1>
-      
+    <div className="container mx-auto px-4">
+      <h1 className="text-center font-extrabold text-3xl mt-6 text-blue-600">
+        Products
+      </h1>
+
       {/* Button to add a new product */}
-      <div className='mt-5 flex justify-end'>
-        <Link to="/create">
-          <Button color="blue" size="md" className="rounded-full shadow-lg">Add Product</Button>
+      <div className="mt-5 flex justify-end">
+        <Link to="/admin/Productsinfo/addProduct">
+          <Button color="blue" size="md" className="rounded-full shadow-lg">
+            Add Product
+          </Button>
         </Link>
       </div>
 
       {/* Table of products */}
       <Card className="mt-6 overflow-auto">
         <table className="w-full table-auto text-left border-separate border-spacing-0">
-          <thead className='bg-blue-gray-100'>
+          <thead className="bg-blue-gray-100">
             <tr>
               {displayColumns.map((column, index) => (
                 <th key={index} className="p-4 text-blue-gray-600 border-b-2">
@@ -72,7 +75,10 @@ const Productinfo = () => {
               const rowClass = isLast ? "p-4" : "p-4 border-b";
 
               return (
-                <tr key={record.id} className="hover:bg-blue-gray-50 transition duration-150 ease-in-out">
+                <tr
+                  key={record.id}
+                  className="hover:bg-blue-gray-50 transition duration-150 ease-in-out"
+                >
                   {displayColumns.map((col) => (
                     <td key={col} className={rowClass}>
                       <Typography
@@ -81,10 +87,14 @@ const Productinfo = () => {
                         className="font-normal text-sm"
                       >
                         {/* Render image for the 'image' column, rating count for 'count', and others directly */}
-                        {col === 'image' ? (
-                          <img src={record[col]} alt={record.title} className="w-24 rounded-md" />
-                        ) : col === 'count' ? (
-                          record.rating?.count || 'N/A'
+                        {col === "image" ? (
+                          <img
+                            src={record[col]}
+                            alt={record.title}
+                            className="w-24 rounded-md"
+                          />
+                        ) : col === "count" ? (
+                          record.rating?.count || "N/A"
                         ) : (
                           record[col]
                         )}
@@ -94,13 +104,19 @@ const Productinfo = () => {
                   <td className={rowClass}>
                     <div className="flex gap-2">
                       {/* Link to the edit page with the product ID */}
-                      <Link to={`/edit-product/${record.id}`}>
-                        <Button color="green" size="sm" className="rounded-full shadow-md">Edit</Button>
+                      <Link to={`/admin/Productsinfo/editProduct`}>
+                        <Button
+                          color="green"
+                          size="sm"
+                          className="rounded-full shadow-md"
+                        >
+                          Edit
+                        </Button>
                       </Link>
-                      <Button 
-                        color="red" 
-                        size="sm" 
-                        className="rounded-full shadow-md" 
+                      <Button
+                        color="red"
+                        size="sm"
+                        className="rounded-full shadow-md"
                         onClick={() => handleDelete(record.id)}
                       >
                         Delete
@@ -115,6 +131,6 @@ const Productinfo = () => {
       </Card>
     </div>
   );
-}
+};
 
 export default Productinfo;

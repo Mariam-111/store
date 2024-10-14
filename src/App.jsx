@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import UserLayout from "./layouts/UserLayout";
 import AdminLayout from "./layouts/AdminLayout";
-import AllUsers from "./pages/AllUsers";
 import Swal from "sweetalert2";
-import ShowUser from "./pages/showUser";
 
 const App = () => {
   const navigate = useNavigate();
@@ -298,13 +296,8 @@ const App = () => {
         />
         <Route
           path="/admin/*"
-          element={<AdminLayout />}
-          // element={currentUser.role === "admin" ? <AdminLayout /> : <Navigate to="/"/>}
-        />
-        <Route
-          path="/admin/AllUsers"
           element={
-            <AllUsers
+            <AdminLayout
               users={users}
               makeAdmin={makeAdmin}
               makeUser={makeUser}
@@ -321,8 +314,8 @@ const App = () => {
               validate={validate}
             />
           }
+          // element={currentUser.role === "admin" ? <AdminLayout /> : <Navigate to="/"/>}
         />
-        <Route path="/admin/AllUsers/ShowUser" element={<ShowUser />} />
       </Routes>
     </div>
   );

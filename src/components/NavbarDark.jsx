@@ -6,9 +6,9 @@ import {
   Input,
 } from "@material-tailwind/react";
 import { BellIcon, Cog6ToothIcon } from "@heroicons/react/24/solid";
-import { Link } from "react-router-dom";  // Import Link from React Router
- 
-export function NavbarDark() {
+import { Link } from "react-router-dom"; // Import Link from React Router
+
+const NavbarDark = () => {
   return (
     <Navbar
       variant="gradient"
@@ -16,24 +16,26 @@ export function NavbarDark() {
       className="mx-auto max-w-screen-xl from-blue-gray-900 to-blue-gray-800 px-4 py-3"
     >
       <div className="flex flex-wrap items-center justify-between gap-y-4 text-white">
-        
         <div className="flex space-x-4">
           <Typography
-            as={Link} to="/"
+            as={Link}
+            to="/admin/dashboard"
             variant="h6"
             className="mr-4 ml-2 cursor-pointer py-1.5"
           >
             Dashboard
           </Typography>
           <Typography
-            as={Link} to="/users"
+            as={Link}
+            to="/admin/AllUsers"
             variant="h6"
             className="cursor-pointer py-1.5"
           >
             Users
           </Typography>
           <Typography
-            as={Link} to="/products"
+            as={Link}
+            to="/admin/Productsinfo"
             variant="h6"
             className="cursor-pointer py-1.5"
           >
@@ -71,4 +73,6 @@ export function NavbarDark() {
       </div>
     </Navbar>
   );
-}
+};
+
+export default NavbarDark;
