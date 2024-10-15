@@ -32,7 +32,6 @@ const Productinfo = () => {
         Products
       </h1>
 
-      {/* Button to add a new product */}
       <div className="mt-5 flex justify-end">
         <Link to="/admin/Productsinfo/addProduct">
           <Button color="blue" size="md" className="rounded-full shadow-lg">
@@ -41,7 +40,6 @@ const Productinfo = () => {
         </Link>
       </div>
 
-      {/* Table of products */}
       <Card className="mt-6 overflow-auto dark:bg-blue-gray-400">
         <table className="w-full table-auto text-left border-separate border-spacing-0">
           <thead className="bg-blue-gray-300 dark:bg-blue-gray-100">
@@ -101,7 +99,7 @@ const Productinfo = () => {
                   ))}
                   <td className={rowClass}>
                     <div className="flex gap-2">
-                      {/* Link to the edit page with the product ID */}
+      
                       <Link to={`/admin/Productsinfo/editProduct/${record.id}`}>
                         <Button
                           color="green"
