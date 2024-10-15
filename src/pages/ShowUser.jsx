@@ -35,9 +35,9 @@ const ShowUser = () => {
   });
 
   return (
-    <div className="py-5">
+    <div className="py-5 bg-white dark:bg-[#0F172A]">
       <Link to="/admin/UsersDashboard/ShowUser/:"></Link>
-      <Card className="w-96 mx-auto">
+      <Card className="w-96 mx-auto bg-gray-300">
         <CardHeader floated={false} className="h-80">
           <img
             src={`${

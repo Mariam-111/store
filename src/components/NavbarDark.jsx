@@ -38,10 +38,10 @@ const NavbarDark = () => {
   }, [mode]);
 
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full flex justify-center bg-white dark:bg-[#0F172A]">
       <Navbar
         variant="gradient"
-        className="w-full bg-white dark:bg-[#0F172A] text-black dark:text-white border border-white/0"
+        className="w-full bg-gray-200 dark:bg-gray-700 text-black dark:text-white border border-white/0"
       >
         <div className="w-full flex flex-wrap items-center justify-between gap-y-4 px-4">
           <div className="flex space-x-4">

@@ -45,7 +45,7 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex justify-center items-center min-h-screen bg-white dark:bg-[#0F172A]">
       <Card className="w-96 shadow-lg">
         <CardBody>
           <Typography variant="h5" className="mb-6 text-center">

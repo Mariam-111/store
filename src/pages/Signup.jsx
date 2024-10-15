@@ -26,7 +26,7 @@ const Signup = ({
     }
   };
   return (
-    <div className="bg-[#eeeeee] dark:bg-[#0F172A] ">
+    <div className="bg-white dark:bg-[#0F172A] ">
       <Card
         color="transparent"
         shadow={false}
