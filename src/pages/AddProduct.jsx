@@ -33,7 +33,6 @@ const AddProduct = () => {
     }));
   };
 
-  // Validation function
   const validateForm = () => {
     const newErrors = {};
     if (!product.title) {
