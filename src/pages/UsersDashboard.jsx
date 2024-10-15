@@ -66,10 +66,10 @@ const UsersDashboard = ({ users, getUsers }) => {
   };
 
   return (
-    <div className="my-5">
+    <div className="bg-white dark:bg-[#0F172A]">
       <div>
         <div className="text-center ">
-          <h1 className="font-bold leading-snug tracking-tight text-slate-800 mx-auto my-6 w-full text-center text-2xl lg:max-w-3xl lg:text-5xl">
+          <h1 className="text-balck dark:text-white font-bold leading-snug tracking-tight text-slate-800 mx-auto p-6 w-full text-center text-2xl lg:max-w-3xl lg:text-5xl">
             Users
           </h1>
 

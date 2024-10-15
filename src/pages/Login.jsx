@@ -44,7 +44,7 @@ const Login = ({ users, setLoggedFlag }) => {
   };
 
   return (
-    <div className="bg-[#eeeeee] dark:bg-[#0F172A] p-10">
+    <div className="bg-white dark:bg-[#0F172A] p-10">
       <Card
         color="transparent"
         shadow={false}

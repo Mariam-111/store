@@ -26,20 +26,16 @@ const AddUser = ({
     }
   };
   return (
-    <div>
-      <Card
-        color="transparent"
-        shadow={false}
-        className="flex items-center mt-10"
-      >
-        <Typography variant="h4" color="blue-gray">
+    <div className="bg-white dark:bg-[#0F172A] ">
+      <Card color="transparent" shadow={false} className="flex items-center  ">
+        <Typography variant="h4" className="dark:text-white">
           Add New User
         </Typography>
         <form
-          className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
+          className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96 "
           onSubmit={handleSubmit}
         >
-          <div className="mb-1 flex flex-col gap-6">
+          <div className="mb-1 flex flex-col gap-6 ">
             <Input
               label="Username"
               name="username"

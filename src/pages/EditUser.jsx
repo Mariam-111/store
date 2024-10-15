@@ -89,9 +89,9 @@ const EditUser = ({ getUsers, users }) => {
   }, [userID]);
 
   return (
-    <div className="py-4">
-      <div className="flex justify-center">
-        <Card color="transparent" className="p-10">
+    <div className="py-4 c">
+      <div className="flex justify-center ">
+        <Card color="transparent" className="p-10 bg-gray-300">
           <Typography variant="h4" color="blue-gray">
             Edit User Information
           </Typography>

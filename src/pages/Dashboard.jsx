@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
   const navigate = useNavigate();
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0F172A] text-black dark:text-white my-5">
+    <div className="min-h-screen bg-white dark:bg-[#0F172A] text-black dark:text-white">
       <div className="container mx-auto p-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Users Card */}

@@ -27,7 +27,7 @@ const Productinfo = () => {
   const displayColumns = ["id", "title", "image", "price", "category", "count"];
 
   return (
-    <div className=" mx-auto px-4 bg-white dark:bg-[#0F172A] text-black dark:text-white my-5">
+    <div className=" mx-auto px-4 bg-white dark:bg-[#0F172A] text-black dark:text-white ">
       <h1 className="text-center font-extrabold text-3xl text-blue-600">
         Products
       </h1>
